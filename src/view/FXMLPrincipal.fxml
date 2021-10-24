@@ -1,0 +1,641 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.validation.*?>
+<?import org.controlsfx.control.textfield.*?>
+<?import java.net.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXSlider?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" minHeight="600.0" minWidth="1420.0" prefHeight="800.0" prefWidth="1420.0" styleClass="parent" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.FXMLPrincipalController">
+   <children>
+      <BorderPane AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <top>
+            <VBox minHeight="-Infinity" minWidth="-Infinity" BorderPane.alignment="TOP_LEFT">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+               <children>
+                  <HBox prefHeight="170.0" prefWidth="900.0">
+                     <children>
+                        <VBox prefHeight="200.0" prefWidth="380.0">
+                           <children>
+                              <Pane prefHeight="160.0" prefWidth="380.0" styleClass="pane" stylesheets="@stylesheet.css">
+                                 <children>
+                                    <VBox layoutY="-7.0" prefHeight="170.0">
+                                       <children>
+                                          <HBox prefHeight="40.0" prefWidth="380.0">
+                                             <children>
+                                                <Label styleClass="label-cabecalho" stylesheets="@stylesheet.css" text="Tempo">
+                                                   <HBox.margin>
+                                                      <Insets left="5.0" top="10.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                                <JFXRadioButton fx:id="rbTempoMes" selected="true" text="Meses">
+                                                   <HBox.margin>
+                                                      <Insets left="10.0" top="13.0" />
+                                                   </HBox.margin>
+                                                </JFXRadioButton>
+                                                <JFXRadioButton fx:id="rbTempoAno" text="Anos">
+                                                   <HBox.margin>
+                                                      <Insets left="10.0" top="13.0" />
+                                                   </HBox.margin>
+                                                </JFXRadioButton>
+                                             </children>
+                                             <padding>
+                                                <Insets left="5.0" right="5.0" />
+                                             </padding>
+                                          </HBox>
+                                          <VBox prefHeight="118.0" prefWidth="380.0">
+                                             <children>
+                                                <HBox prefHeight="40.0" prefWidth="200.0">
+                                                   <children>
+                                                      <Label fx:id="lblTempo" prefWidth="280.0" styleClass="label-real" stylesheets="@stylesheet.css" text="320">
+                                                         <padding>
+                                                            <Insets bottom="10.0" left="20.0" top="10.0" />
+                                                         </padding>
+                                                         <HBox.margin>
+                                                            <Insets />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                      <ImageView fitHeight="50.0" fitWidth="50.0" opacity="0.75" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@images/ampulheta.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </children>
+                                                </HBox>
+                                                <JFXSlider fx:id="slTempo" blockIncrement="1.0" majorTickUnit="50.0" max="420.0" min="1.0" minorTickCount="50" showTickLabels="true" showTickMarks="true" value="320.0">
+                                                   <VBox.margin>
+                                                      <Insets left="10.0" right="10.0" top="20.0" />
+                                                   </VBox.margin>
+                                                </JFXSlider>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </Pane>
+                           </children>
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </VBox>
+                        <VBox prefHeight="200.0" prefWidth="480.0">
+                           <children>
+                              <Pane prefHeight="160.0" prefWidth="480.0" styleClass="pane" stylesheets="@stylesheet.css">
+                                 <children>
+                                    <VBox layoutY="-7.0" prefHeight="170.0" prefWidth="480.0" stylesheets="@stylesheet.css">
+                                       <children>
+                                          <HBox prefHeight="40.0" prefWidth="380.0">
+                                             <children>
+                                                <Label styleClass="label-cabecalho" stylesheets="@stylesheet.css" text="Valor do Bem">
+                                                   <HBox.margin>
+                                                      <Insets left="5.0" top="10.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                             </children>
+                                             <padding>
+                                                <Insets left="5.0" right="5.0" />
+                                             </padding>
+                                          </HBox>
+                                          <VBox prefHeight="118.0" prefWidth="420.0">
+                                             <children>
+                                                <HBox prefHeight="40.0" prefWidth="200.0">
+                                                   <children>
+                                                      <JFXTextField fx:id="tfValorBem" text="100000">
+                                                         <HBox.margin>
+                                                            <Insets left="10.0" top="10.0" />
+                                                         </HBox.margin>
+                                                         <padding>
+                                                            <Insets left="5.0" top="5.0" />
+                                                         </padding>
+                                                         <font>
+                                                            <Font name="System Bold" size="15.0" />
+                                                         </font>
+                                                      </JFXTextField>
+                                                      <ImageView fitHeight="50.0" fitWidth="133.0" opacity="0.75" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@images/money.png" />
+                                                         </image>
+                                                         <HBox.margin>
+                                                            <Insets left="170.0" />
+                                                         </HBox.margin>
+                                                      </ImageView>
+                                                   </children>
+                                                </HBox>
+                                                <HBox prefHeight="100.0" prefWidth="200.0">
+                                                   <children>
+                                                      <VBox prefHeight="200.0" prefWidth="100.0">
+                                                         <children>
+                                                            <JFXTextField fx:id="tfMinValorBem" labelFloat="true" promptText="Min" text="0">
+                                                               <VBox.margin>
+                                                                  <Insets top="15.0" />
+                                                               </VBox.margin>
+                                                            </JFXTextField>
+                                                         </children>
+                                                         <padding>
+                                                            <Insets left="5.0" right="5.0" top="8.0" />
+                                                         </padding>
+                                                      </VBox>
+                                                      <JFXSlider fx:id="slValorBem" blockIncrement="1.0" majorTickUnit="20000.0" max="150000.0" min="1.0" minorTickCount="20000" prefWidth="280.0" showTickLabels="true" showTickMarks="true" value="100000.0">
+                                                         <HBox.margin>
+                                                            <Insets top="5.0" />
+                                                         </HBox.margin>
+                                                         <padding>
+                                                            <Insets left="8.0" right="8.0" top="25.0" />
+                                                         </padding>
+                                                      </JFXSlider>
+                                                      <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
+                                                         <children>
+                                                            <JFXTextField fx:id="tfMaxValorBem" labelFloat="true" promptText="Max" text="150000">
+                                                               <VBox.margin>
+                                                                  <Insets top="15.0" />
+                                                               </VBox.margin>
+                                                            </JFXTextField>
+                                                         </children>
+                                                         <padding>
+                                                            <Insets left="5.0" right="5.0" top="8.0" />
+                                                         </padding>
+                                                      </VBox>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="15.0" />
+                                 </HBox.margin>
+                              </Pane>
+                           </children>
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </VBox>
+                        <VBox layoutX="400.0" layoutY="10.0" prefHeight="200.0" prefWidth="480.0">
+                           <children>
+                              <Pane prefHeight="160.0" prefWidth="480.0" styleClass="pane" stylesheets="@stylesheet.css">
+                                 <children>
+                                    <VBox layoutY="-7.0" prefHeight="170.0" prefWidth="480.0" stylesheets="@stylesheet.css">
+                                       <children>
+                                          <HBox prefHeight="40.0" prefWidth="380.0">
+                                             <children>
+                                                <Label styleClass="label-cabecalho" stylesheets="@stylesheet.css" text="Entrada">
+                                                   <HBox.margin>
+                                                      <Insets left="5.0" top="10.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                             </children>
+                                             <padding>
+                                                <Insets left="5.0" right="5.0" />
+                                             </padding>
+                                          </HBox>
+                                          <VBox prefHeight="118.0" prefWidth="420.0">
+                                             <children>
+                                                <HBox prefHeight="40.0" prefWidth="200.0">
+                                                   <children>
+                                                      <JFXTextField fx:id="tfEntrada" text="100000">
+                                                         <font>
+                                                            <Font name="System Bold" size="15.0" />
+                                                         </font>
+                                                         <padding>
+                                                            <Insets left="5.0" top="5.0" />
+                                                         </padding>
+                                                         <HBox.margin>
+                                                            <Insets left="10.0" top="10.0" />
+                                                         </HBox.margin>
+                                                      </JFXTextField>
+                                                      <ImageView fitHeight="50.0" fitWidth="133.0" opacity="0.75" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@images/profits.png" />
+                                                         </image>
+                                                         <HBox.margin>
+                                                            <Insets left="170.0" />
+                                                         </HBox.margin>
+                                                      </ImageView>
+                                                   </children>
+                                                </HBox>
+                                                <HBox prefHeight="100.0" prefWidth="200.0">
+                                                   <children>
+                                                      <VBox prefHeight="200.0" prefWidth="100.0">
+                                                         <padding>
+                                                            <Insets left="5.0" right="5.0" top="8.0" />
+                                                         </padding>
+                                                         <children>
+                                                            <JFXTextField fx:id="tfMinEntrada" labelFloat="true" promptText="Min" text="0">
+                                                               <VBox.margin>
+                                                                  <Insets top="15.0" />
+                                                               </VBox.margin>
+                                                            </JFXTextField>
+                                                         </children>
+                                                      </VBox>
+                                                      <JFXSlider fx:id="slEntrada" blockIncrement="1.0" majorTickUnit="20000.0" max="150000.0" min="1.0" minorTickCount="9999" prefWidth="280.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="100000.0">
+                                                         <padding>
+                                                            <Insets left="8.0" right="8.0" top="25.0" />
+                                                         </padding>
+                                                         <HBox.margin>
+                                                            <Insets top="5.0" />
+                                                         </HBox.margin>
+                                                      </JFXSlider>
+                                                      <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
+                                                         <padding>
+                                                            <Insets left="5.0" right="5.0" top="8.0" />
+                                                         </padding>
+                                                         <children>
+                                                            <JFXTextField fx:id="tfMaxEntrada" labelFloat="true" promptText="Max" text="150000">
+                                                               <VBox.margin>
+                                                                  <Insets top="15.0" />
+                                                               </VBox.margin>
+                                                            </JFXTextField>
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="15.0" />
+                                 </HBox.margin>
+                              </Pane>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="20.0" layoutY="20.0" prefHeight="170.0" prefWidth="900.0">
+                     <children>
+                        <VBox prefHeight="200.0" prefWidth="380.0">
+                           <children>
+                              <Pane prefHeight="160.0" prefWidth="380.0" styleClass="pane" stylesheets="@stylesheet.css">
+                                 <children>
+                                    <VBox layoutY="-7.0" prefHeight="170.0">
+                                       <children>
+                                          <HBox prefHeight="40.0" prefWidth="380.0">
+                                             <children>
+                                                <Label styleClass="label-cabecalho" stylesheets="@stylesheet.css" text="Taxa">
+                                                   <HBox.margin>
+                                                      <Insets left="5.0" top="10.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                                <JFXRadioButton fx:id="rbTaxaMes" text="ao Mês">
+                                                   <HBox.margin>
+                                                      <Insets left="10.0" top="13.0" />
+                                                   </HBox.margin>
+                                                </JFXRadioButton>
+                                                <JFXRadioButton fx:id="rbTaxaAno" text="ao Ano">
+                                                   <HBox.margin>
+                                                      <Insets left="10.0" top="13.0" />
+                                                   </HBox.margin>
+                                                </JFXRadioButton>
+                                             </children>
+                                             <padding>
+                                                <Insets left="5.0" right="5.0" />
+                                             </padding>
+                                          </HBox>
+                                          <VBox prefHeight="118.0" prefWidth="380.0">
+                                             <children>
+                                                <HBox prefHeight="40.0" prefWidth="200.0">
+                                                   <children>
+                                                      <JFXTextField fx:id="tfTaxa" text="7,2">
+                                                         <font>
+                                                            <Font name="System Bold" size="15.0" />
+                                                         </font>
+                                                         <padding>
+                                                            <Insets left="5.0" top="5.0" />
+                                                         </padding>
+                                                         <HBox.margin>
+                                                            <Insets left="10.0" top="10.0" />
+                                                         </HBox.margin>
+                                                      </JFXTextField>
+                                                      <ImageView fitHeight="50.0" fitWidth="50.0" opacity="0.75" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@images/taxa-de-juro.png" />
+                                                         </image>
+                                                         <HBox.margin>
+                                                            <Insets left="80.0" />
+                                                         </HBox.margin>
+                                                      </ImageView>
+                                                   </children>
+                                                </HBox>
+                                                <HBox prefHeight="100.0" prefWidth="200.0">
+                                                   <children>
+                                                      <VBox prefHeight="200.0" prefWidth="100.0">
+                                                         <padding>
+                                                            <Insets left="5.0" right="5.0" top="8.0" />
+                                                         </padding>
+                                                         <children>
+                                                            <JFXTextField fx:id="tfMinTaxa" labelFloat="true" promptText="Min" text="0">
+                                                               <VBox.margin>
+                                                                  <Insets top="15.0" />
+                                                               </VBox.margin>
+                                                            </JFXTextField>
+                                                         </children>
+                                                      </VBox>
+                                                      <JFXSlider fx:id="slTaxa" blockIncrement="0.01" majorTickUnit="10.0" max="20.0" min="1.0" minorTickCount="9" prefWidth="280.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="7.0">
+                                                         <padding>
+                                                            <Insets left="8.0" right="8.0" top="25.0" />
+                                                         </padding>
+                                                         <HBox.margin>
+                                                            <Insets top="5.0" />
+                                                         </HBox.margin>
+                                                      </JFXSlider>
+                                                      <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
+                                                         <padding>
+                                                            <Insets left="5.0" right="5.0" top="8.0" />
+                                                         </padding>
+                                                         <children>
+                                                            <JFXTextField fx:id="tfMaxTaxa" labelFloat="true" promptText="Max" text="20">
+                                                               <VBox.margin>
+                                                                  <Insets top="15.0" />
+                                                               </VBox.margin>
+                                                            </JFXTextField>
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </Pane>
+                           </children>
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </VBox>
+                        <VBox prefHeight="200.0" prefWidth="972.0">
+                           <children>
+                              <Pane prefHeight="160.0" prefWidth="972.0" styleClass="pane" stylesheets="@stylesheet.css">
+                                 <children>
+                                    <VBox layoutY="-7.0" prefHeight="170.0" prefWidth="972.0" stylesheets="@stylesheet.css">
+                                       <children>
+                                          <HBox prefHeight="40.0" prefWidth="380.0">
+                                             <children>
+                                                <Label styleClass="label-cabecalho" stylesheets="@stylesheet.css" text="Amortização">
+                                                   <HBox.margin>
+                                                      <Insets left="5.0" top="10.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                             </children>
+                                             <padding>
+                                                <Insets left="5.0" right="5.0" />
+                                             </padding>
+                                          </HBox>
+                                          <VBox prefHeight="118.0" prefWidth="972.0">
+                                             <children>
+                                                <HBox prefHeight="40.0" prefWidth="972.0">
+                                                   <children>
+                                                      <JFXTextField fx:id="tfAmortizacao" text="100000">
+                                                         <font>
+                                                            <Font name="System Bold" size="15.0" />
+                                                         </font>
+                                                         <padding>
+                                                            <Insets left="5.0" top="5.0" />
+                                                         </padding>
+                                                         <HBox.margin>
+                                                            <Insets left="10.0" top="10.0" />
+                                                         </HBox.margin>
+                                                      </JFXTextField>
+                                                      <JFXComboBox prefWidth="150.0">
+                                                         <HBox.margin>
+                                                            <Insets left="10.0" top="10.0" />
+                                                         </HBox.margin>
+                                                      </JFXComboBox>
+                                                      <JFXComboBox layoutX="175.0" layoutY="20.0" prefWidth="150.0">
+                                                         <HBox.margin>
+                                                            <Insets left="10.0" top="10.0" />
+                                                         </HBox.margin>
+                                                      </JFXComboBox>
+                                                      <ImageView fitHeight="50.0" fitWidth="133.0" opacity="0.75" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@images/forma-de-pagamento.png" />
+                                                         </image>
+                                                         <HBox.margin>
+                                                            <Insets left="340.0" />
+                                                         </HBox.margin>
+                                                      </ImageView>
+                                                   </children>
+                                                </HBox>
+                                                <HBox prefHeight="100.0" prefWidth="972.0">
+                                                   <children>
+                                                      <VBox prefHeight="200.0" prefWidth="200.0">
+                                                         <padding>
+                                                            <Insets left="5.0" right="5.0" top="8.0" />
+                                                         </padding>
+                                                         <children>
+                                                            <JFXTextField fx:id="tfMinAmort" labelFloat="true" promptText="Min" text="0">
+                                                               <padding>
+                                                                  <Insets top="15.0" />
+                                                               </padding>
+                                                            </JFXTextField>
+                                                         </children>
+                                                      </VBox>
+                                                      <JFXSlider fx:id="slAmort" blockIncrement="1.0" majorTickUnit="20000.0" max="150000.0" min="1.0" minorTickCount="9999" prefWidth="600.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="100000.0">
+                                                         <padding>
+                                                            <Insets left="8.0" right="8.0" top="25.0" />
+                                                         </padding>
+                                                         <HBox.margin>
+                                                            <Insets top="5.0" />
+                                                         </HBox.margin>
+                                                      </JFXSlider>
+                                                      <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0">
+                                                         <padding>
+                                                            <Insets left="5.0" right="5.0" top="8.0" />
+                                                         </padding>
+                                                         <children>
+                                                            <JFXTextField fx:id="tfMaxAmort" labelFloat="true" promptText="Max" text="150000">
+                                                               <padding>
+                                                                  <Insets top="15.0" />
+                                                               </padding>
+                                                            </JFXTextField>
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets left="15.0" />
+                                 </HBox.margin>
+                              </Pane>
+                           </children>
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </VBox>
+         </top>
+         <padding>
+            <Insets left="5.0" right="5.0" />
+         </padding>
+         <center>
+            <BorderPane prefHeight="450.0" prefWidth="1380.0" BorderPane.alignment="CENTER">
+               <center>
+                  <JFXTabPane prefHeight="262.0" prefWidth="1380.0" BorderPane.alignment="CENTER">
+                     <tabs>
+                        <Tab text="Simulação">
+                          <content>
+                            <AnchorPane minHeight="150.0" minWidth="900.0" prefHeight="180.0" prefWidth="1380.0">
+                                 <children>
+                                    <VBox prefHeight="410.0" prefWidth="1380.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                       <children>
+                                          <JFXTabPane prefHeight="410.0" prefWidth="1380.0">
+                                             <tabs>
+                                                <Tab text="Resumo">
+                                                  <content>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="380.0" prefWidth="200.0">
+                                                         <children>
+                                                            <VBox prefHeight="107.0" prefWidth="1380.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                               <children>
+                                                                  <TableView prefHeight="410.0" prefWidth="200.0" styleClass="table-view-resumo" stylesheets="@stylesheet.css">
+                                                                    <columns>
+                                                                      <TableColumn editable="false" prefWidth="354.0" resizable="false" sortable="false" text="Campos" />
+                                                                      <TableColumn editable="false" minWidth="155.0" prefWidth="225.0" resizable="false" sortable="false" text="Valores">
+                                                                           <columns>
+                                                                              <TableColumn editable="false" prefWidth="200.0" resizable="false" sortable="false" text="SAC" />
+                                                                              <TableColumn editable="false" prefWidth="200.0" resizable="false" sortable="false" text="PRICE" />
+                                                                           </columns>
+                                                                        </TableColumn>
+                                                                        <TableColumn minWidth="380.0" prefWidth="380.0" resizable="false" text="Diferença" />
+                                                                        <TableColumn minWidth="350.0" prefWidth="350.0" resizable="false" text="\%" />
+                                                                    </columns>
+                                                                  </TableView>
+                                                               </children></VBox>
+                                                         </children></AnchorPane>
+                                                  </content>
+                                                </Tab>
+                                                <Tab text="Detalhe">
+                                                  <content>
+                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                         <children>
+                                                            <VBox prefHeight="375.0" prefWidth="1380.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                                               <children>
+                                                                  <TitledPane animated="false" collapsible="false" styleClass="titled-pane-detalhe" stylesheets="@stylesheet.css" text="SAC">
+                                                                    <content>
+                                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                                           <children>
+                                                                              <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                                 <center>
+                                                                                    <TableView prefHeight="100.0" styleClass="table-view-resumo" stylesheets="@stylesheet.css" BorderPane.alignment="CENTER">
+                                                                                      <columns>
+                                                                                        <TableColumn prefWidth="75.0" text="Parcela" />
+                                                                                        <TableColumn prefWidth="130.0" text="Data" />
+                                                                                          <TableColumn prefWidth="200.0" text="Valor Prestação" />
+                                                                                          <TableColumn prefWidth="200.0" text="Valor Principal" />
+                                                                                          <TableColumn prefWidth="200.0" text="Juros" />
+                                                                                          <TableColumn prefWidth="130.0" text="MIP" />
+                                                                                          <TableColumn prefWidth="130.0" text="DFI" />
+                                                                                          <TableColumn prefWidth="130.0" text="Tarifa" />
+                                                                                          <TableColumn prefWidth="200.0" text="Saldo Devedor" />
+                                                                                      </columns>
+                                                                                       <BorderPane.margin>
+                                                                                          <Insets />
+                                                                                       </BorderPane.margin>
+                                                                                    </TableView>
+                                                                                 </center>
+                                                                              </BorderPane>
+                                                                           </children>
+                                                                        </AnchorPane>
+                                                                    </content>
+                                                                     <padding>
+                                                                        <Insets bottom="5.0" />
+                                                                     </padding>
+                                                                  </TitledPane>
+                                                                  <TitledPane animated="false" collapsible="false" layoutX="10.0" layoutY="15.0" styleClass="titled-pane-detalhe" stylesheets="@stylesheet.css" text="PRICE">
+                                                                     <content>
+                                                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                                           <children>
+                                                                              <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                                 <center>
+                                                                                    <TableView prefHeight="100.0" styleClass="table-view-resumo" stylesheets="@stylesheet.css" BorderPane.alignment="CENTER">
+                                                                                       <columns>
+                                                                                          <TableColumn prefWidth="75.0" text="Parcela" />
+                                                                                          <TableColumn prefWidth="130.0" text="Data" />
+                                                                                          <TableColumn prefWidth="200.0" text="Valor Prestação" />
+                                                                                          <TableColumn prefWidth="200.0" text="Valor Principal" />
+                                                                                          <TableColumn prefWidth="200.0" text="Juros" />
+                                                                                          <TableColumn prefWidth="130.0" text="MIP" />
+                                                                                          <TableColumn prefWidth="130.0" text="DFI" />
+                                                                                          <TableColumn prefWidth="130.0" text="Tarifa" />
+                                                                                          <TableColumn prefWidth="200.0" text="Saldo Devedor" />
+                                                                                       </columns>
+                                                                                       <BorderPane.margin>
+                                                                                          <Insets />
+                                                                                       </BorderPane.margin>
+                                                                                    </TableView>
+                                                                                 </center>
+                                                                              </BorderPane>
+                                                                           </children>
+                                                                        </AnchorPane>
+                                                                     </content>
+                                                                  </TitledPane>
+                                                               </children>
+                                                               <padding>
+                                                                  <Insets bottom="5.0" top="5.0" />
+                                                               </padding>
+                                                            </VBox>
+                                                         </children></AnchorPane>
+                                                  </content>
+                                                </Tab>
+                                             </tabs>
+                                          </JFXTabPane>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </Tab>
+                        <Tab text="Comparativo">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox prefHeight="200.0" prefWidth="1380.0" />
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </Tab>
+                     </tabs>
+                  </JFXTabPane>
+               </center>
+               <BorderPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </BorderPane.margin>
+            </BorderPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

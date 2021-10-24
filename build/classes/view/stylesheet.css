@@ -1,0 +1,69 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 22/10/2021, 23:14:19
+    Author     : israe
+*/
+
+.parent{
+    -fx-background-color: #F2F3F9;   
+}
+.pane{
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 5%;
+}
+.label-cabecalho{
+    -fx-font-size: 14pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: black;
+    -fx-opacity: 1;
+    -fx-font-weight:bold;
+}
+.label-real{
+    -fx-font-size: 20pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: black;
+    -fx-opacity: 1;
+    -fx-font-weight:bold;
+}
+.table-view-resumo {
+    -fx-background-color: transparent;
+}
+.table-view-resumo .column-header-background .filler {
+    -fx-background-color: transparent;
+}
+.table-view-resumo .corner {
+    -fx-background-color: transparent;
+}
+.table-view-resumo .column-header-background{
+    -fx-background-color: linear-gradient(to bottom, #1dbbdd44, #93f9b944);
+    -fx-background-radius: 7px 7px 0px 0px;
+    -fx-background-insets: 0 0 0 0;
+    -fx-padding: 0 0 5px 0;
+}
+.table-view-resumo .column-header {
+    -fx-background-color: transparent;
+}
+.table-view-resumo .table-cell{
+    -fx-border-color: transparent;
+    -fx-padding: 2 0 2 10px;
+}
+
+.titled-pane-detalhe > .title 
+{
+    -fx-background-color: -fx-box-border, -fx-inner-border, -fx-body-color;
+    -fx-background-color:#FFFFFF;
+    -fx-background-insets: 0, 1, 2;
+    -fx-background-radius: 5 5 0 0, 4 4 0 0, 3 3 0 0;
+    -fx-padding: 0.166667em 0.833333em 0.25em 0.833333em; /* 2 10 3 10 */
+    -fx-border-color: transparent;
+    /*-fx-background-color: linear-gradient(to bottom, #1dbbdd44, #93f9b944);*/
+}
+.titled-pane-detalhe > .content
+{
+    -fx-border-color: transparent;
+    -fx-background-color:#FFFFFF;   
+}
