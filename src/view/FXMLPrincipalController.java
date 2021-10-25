@@ -5,18 +5,36 @@
  */
 package view;
 
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXSlider;
 import com.jfoenix.controls.JFXTextField;
 import java.math.BigDecimal;
 import java.net.URL;
+import java.text.DateFormat;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.SingleSelectionModel;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.cell.PropertyValueFactory;
+import util.Resumo;
+import util.Simulacao;
 import util.Util;
 
 /**
@@ -95,11 +113,66 @@ public class FXMLPrincipalController implements Initializable {
     private JFXRadioButton rbTaxaAno;
     
     @FXML
-    private JFXRadioButton rbTaxaMes; 
+    private JFXRadioButton rbTaxaMes;
+    
+    @FXML
+    private JFXComboBox<String> cbFreq;
+        
+    @FXML
+    private JFXComboBox<String> cbTipo;    
+    
+    //Criar objeto
+    @FXML
+    private TableView<Resumo> tabelaResumo;
+    
+    @FXML
+    private TableColumn<Resumo, Double> colResSac;
+
+    @FXML
+    private TableColumn<Resumo, Double> colResPrice;
+
+    @FXML
+    private TableColumn<Resumo, String> colResCampos;
+
+    @FXML
+    private TableColumn<Resumo, String> colResPerc;
+
+    @FXML
+    private TableColumn<Resumo, String> colResDiferenca;
+    
+    int qtdTempo;
+    double valBem;
+    double valEntrada;
+    double valTaxa;
+    String frequencia;        
+    String tipo;
+    double aporte;    
+    
+    public void carrega()
+    {
+        qtdTempo = Integer.parseInt(lblTempo.getText());
+        valBem = Double.parseDouble(tfValorBem.getText());
+        valEntrada = Double.parseDouble(tfEntrada.getText());
+        valTaxa = Double.parseDouble(tfTaxa.getText().replace(",", "").replace(".", ""))/10000;
+        frequencia = (String)(cbFreq.getSelectionModel().getSelectedItem());        
+        tipo = (String)(cbTipo.getSelectionModel().getSelectedItem());
+        aporte = Double.parseDouble(tfAmort.getText());
+    }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        //Variaveis
+        ObservableList<String> freq = FXCollections.observableArrayList("Anual","Mensal");
+        ObservableList<String> tip = FXCollections.observableArrayList("Saldo Devedor","Parcelas");
+        
+        cbFreq.setItems(freq);
+        cbTipo.setItems(tip);
+        cbFreq.setValue("Mensal");
+        cbTipo.setValue("Saldo Devedor");
+        
+        carrega();   
+                
         ToggleGroup groupTempo = new ToggleGroup();
         rbTempoAno.setToggleGroup(groupTempo);
         rbTempoMes.setToggleGroup(groupTempo);
@@ -157,7 +230,11 @@ public class FXMLPrincipalController implements Initializable {
         });
         
         slValorBem.valueProperty().addListener((observable, oldValue, newValue) ->
-        tfValorBem.setText(String.valueOf(Math.abs(newValue.intValue()))));
+        {
+            tfValorBem.setText(String.valueOf(Math.abs(newValue.intValue())));
+            carrega();
+            calcular(qtdTempo,valBem,valEntrada,valTaxa,frequencia,aporte,tipo);
+        });
         
         tfValorBem.textProperty().addListener((observable, oldValue, newValue) ->
         slValorBem.setValue(Math.abs(Double.valueOf(newValue))));
@@ -203,6 +280,107 @@ public class FXMLPrincipalController implements Initializable {
         
         tfMaxAmort.textProperty().addListener((observable, oldValue, newValue) ->
         slAmort.setMax(Math.abs(Double.valueOf(newValue))));
-    }    
+        
+        
+        colResCampos.setCellValueFactory(
+                new PropertyValueFactory<>("campo"));
+        colResSac.setCellValueFactory(
+                new PropertyValueFactory<>("sac"));
+        colResPrice.setCellValueFactory(
+                new PropertyValueFactory<>("price"));
+        colResDiferenca.setCellValueFactory(
+                new PropertyValueFactory<>("diferenca"));
+        colResPerc.setCellValueFactory(
+                new PropertyValueFactory<>("perc"));
+    }
+
+    public void calcular(int qtdTempo,double valBem,double valEntrada, double valTaxa, String frequencia, double aporte, String tipo)
+    {
+                
+        if (frequencia.equals("Anual"))
+            aporte=aporte/12.0;
+        double valSaldoSac = valBem-valEntrada;
+        
+        //SAC
+        int parcelaSac = 0;
+        Date dtInicialSac = new Date();
+        Date dtDataSac = new Date();
+        double valorPrincipalOriginalSac = valSaldoSac/qtdTempo;
+        ArrayList<Simulacao> simSac = new ArrayList<Simulacao>();
+        double prestacaoSac = 0;
+        double jurosSac = 0;
+        int ultParcelaSac = 0;
+        double somaAportesSac = 0;
+        double somaPrestacoesSac = 0;
+        double valTaxaSac = valTaxa;
+        for(int i = 0;i<qtdTempo;i++)
+        {
+            if (valSaldoSac>0)
+            jurosSac = valSaldoSac*valTaxaSac/100;
+            else
+                jurosSac=0;
+            prestacaoSac = valorPrincipalOriginalSac + jurosSac;
+            parcelaSac=i;
+            LocalDate localData = dtDataSac.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            localData = localData.plusMonths(1);
+            
+            DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+            String data = (df.format(Date.from(localData.atStartOfDay(ZoneId.systemDefault()).toInstant())));
+            simSac.add(new Simulacao(parcelaSac,data,prestacaoSac,valorPrincipalOriginalSac,jurosSac,valSaldoSac));
+             
+            //chart.addItemSAC(parcela, prestacao);
+            if (valSaldoSac>=(valorPrincipalOriginalSac+aporte))
+            {
+                if (tipo=="Saldo Devedor")
+                {
+                    valSaldoSac=valSaldoSac-valorPrincipalOriginalSac-aporte;
+                }
+                else
+                {
+                    valSaldoSac=valSaldoSac-valorPrincipalOriginalSac-aporte;
+                    valorPrincipalOriginalSac = valSaldoSac/(qtdTempo-parcelaSac+1);
+                }
+                somaAportesSac = somaAportesSac+aporte;
+                somaPrestacoesSac = somaPrestacoesSac+prestacaoSac;
+            }
+            else 
+            {   
+                aporte=valSaldoSac-valorPrincipalOriginalSac;
+                somaAportesSac = somaAportesSac+aporte;
+                valSaldoSac=valSaldoSac-valorPrincipalOriginalSac-aporte;
+                somaPrestacoesSac = somaPrestacoesSac+prestacaoSac;
+                /*chartBarra.addItem(somaPrestacoes, "SAC", "Prestações");
+                chartBarra.addItem(somaAportes, "SAC", "Aportes");
+                chartBarra.addItem(somaPrestacoes+somaAportes+entrada, "SAC", "Total Pago");*/
+                ultParcelaSac = i;
+                break;                
+            }
+            
+            
+            dtDataSac=Date.from(localData.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        }
+        double qtd = qtdTempo;
+        double ult = ultParcelaSac;
+        tabelaResumo.getItems().clear();
+        tabelaResumo.getItems().add(new Resumo("Meses Previstos", qtd, 0.0,"",""));
+        tabelaResumo.getItems().add(new Resumo("Meses Pagando", ult, 0.0,"",""));
+        tabelaResumo.getItems().add(new Resumo("Meses Amortizados", (qtd-ult), 0.0,"",""));
+        tabelaResumo.getItems().add(new Resumo("Anos Previstos", (qtd/12), 0.0,"",""));
+        tabelaResumo.getItems().add(new Resumo("Anos Pagando", (ult/12), 0.0,"",""));
+        tabelaResumo.getItems().add(new Resumo("Anos Amortizados", (qtd-ult)/12, 0.0,"",""));
+        tabelaResumo.getItems().add(new Resumo("Valor Principal", prestacaoSac, 0.0,"",""));
+        tabelaResumo.getItems().add(new Resumo("Total Aportado", somaAportesSac, 0.0,"",""));
+        tabelaResumo.getItems().add(new Resumo("Total Prestações", somaPrestacoesSac, 0.0,"",""));
+        tabelaResumo.getItems().add(new Resumo("Total Pago", somaPrestacoesSac+somaAportesSac+valEntrada, 0.0,"",""));
+               
+        
+        
+        
+        
+        
+                
+    }
+    
+    
     
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 <?import com.jfoenix.validation.*?>
 <?import org.controlsfx.control.textfield.*?>
@@ -401,6 +402,22 @@
                                                       <Insets left="5.0" top="10.0" />
                                                    </HBox.margin>
                                                 </Label>
+                                                <Label text="Frequência" textFill="#aea4a4">
+                                                   <HBox.margin>
+                                                      <Insets left="125.0" top="20.0" />
+                                                   </HBox.margin>
+                                                   <font>
+                                                      <Font size="12.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label layoutX="247.0" layoutY="30.0" text="Tipo" textFill="#aea4a4">
+                                                   <HBox.margin>
+                                                      <Insets left="140.0" top="20.0" />
+                                                   </HBox.margin>
+                                                   <font>
+                                                      <Font size="12.0" />
+                                                   </font>
+                                                </Label>
                                              </children>
                                              <padding>
                                                 <Insets left="5.0" right="5.0" />
@@ -421,14 +438,14 @@
                                                             <Insets left="10.0" top="10.0" />
                                                          </HBox.margin>
                                                       </JFXTextField>
-                                                      <JFXComboBox prefWidth="150.0">
+                                                      <JFXComboBox fx:id="cbFreq" prefWidth="180.0">
                                                          <HBox.margin>
-                                                            <Insets left="10.0" top="10.0" />
+                                                            <Insets left="80.0" top="10.0" />
                                                          </HBox.margin>
                                                       </JFXComboBox>
-                                                      <JFXComboBox layoutX="175.0" layoutY="20.0" prefWidth="150.0">
+                                                      <JFXComboBox fx:id="cbTipo" layoutX="175.0" layoutY="20.0" prefWidth="180.0">
                                                          <HBox.margin>
-                                                            <Insets left="10.0" top="10.0" />
+                                                            <Insets left="50.0" top="10.0" />
                                                          </HBox.margin>
                                                       </JFXComboBox>
                                                       <ImageView fitHeight="50.0" fitWidth="133.0" opacity="0.75" pickOnBounds="true" preserveRatio="true">
@@ -521,17 +538,17 @@
                                                          <children>
                                                             <VBox prefHeight="107.0" prefWidth="1380.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                <children>
-                                                                  <TableView prefHeight="410.0" prefWidth="200.0" styleClass="table-view-resumo" stylesheets="@stylesheet.css">
+                                                                  <TableView fx:id="tabelaResumo" prefHeight="410.0" prefWidth="200.0" styleClass="table-view-resumo" stylesheets="@stylesheet.css">
                                                                     <columns>
-                                                                      <TableColumn editable="false" prefWidth="354.0" resizable="false" sortable="false" text="Campos" />
+                                                                      <TableColumn fx:id="colResCampos" editable="false" prefWidth="354.0" resizable="false" sortable="false" text="Campos" />
                                                                       <TableColumn editable="false" minWidth="155.0" prefWidth="225.0" resizable="false" sortable="false" text="Valores">
                                                                            <columns>
-                                                                              <TableColumn editable="false" prefWidth="200.0" resizable="false" sortable="false" text="SAC" />
-                                                                              <TableColumn editable="false" prefWidth="200.0" resizable="false" sortable="false" text="PRICE" />
+                                                                              <TableColumn fx:id="colResSac" editable="false" prefWidth="200.0" resizable="false" sortable="false" text="SAC" />
+                                                                              <TableColumn fx:id="colResPrice" editable="false" prefWidth="200.0" resizable="false" sortable="false" text="PRICE" />
                                                                            </columns>
                                                                         </TableColumn>
-                                                                        <TableColumn minWidth="380.0" prefWidth="380.0" resizable="false" text="Diferença" />
-                                                                        <TableColumn minWidth="350.0" prefWidth="350.0" resizable="false" text="\%" />
+                                                                        <TableColumn fx:id="colResDiferenca" minWidth="380.0" prefWidth="380.0" resizable="false" text="Diferença" />
+                                                                        <TableColumn fx:id="colResPerc" minWidth="350.0" prefWidth="350.0" resizable="false" text="\%" />
                                                                     </columns>
                                                                   </TableView>
                                                                </children></VBox>
