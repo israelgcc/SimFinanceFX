@@ -320,7 +320,7 @@
                                              <children>
                                                 <HBox prefHeight="40.0" prefWidth="200.0">
                                                    <children>
-                                                      <JFXTextField fx:id="tfTaxa" text="100000">
+                                                      <JFXTextField fx:id="tfTaxa" text="7,2">
                                                          <font>
                                                             <Font name="System Bold" size="15.0" />
                                                          </font>
@@ -355,7 +355,7 @@
                                                             </JFXTextField>
                                                          </children>
                                                       </VBox>
-                                                      <JFXSlider blockIncrement="0.01" majorTickUnit="10.0" max="20.0" min="1.0" minorTickCount="9" prefWidth="280.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="7.0">
+                                                      <JFXSlider fx:id="slTaxa" blockIncrement="0.01" majorTickUnit="10.0" max="20.0" min="1.0" minorTickCount="9" prefWidth="280.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="7.0">
                                                          <padding>
                                                             <Insets left="8.0" right="8.0" top="25.0" />
                                                          </padding>
@@ -410,14 +410,17 @@
                                              <children>
                                                 <HBox prefHeight="40.0" prefWidth="972.0">
                                                    <children>
-                                                      <TextField prefWidth="200.0" text="100000">
+                                                      <JFXTextField fx:id="tfAmort" text="100000">
+                                                         <font>
+                                                            <Font name="System Bold" size="15.0" />
+                                                         </font>
                                                          <padding>
                                                             <Insets left="5.0" top="5.0" />
                                                          </padding>
                                                          <HBox.margin>
                                                             <Insets left="10.0" top="10.0" />
                                                          </HBox.margin>
-                                                      </TextField>
+                                                      </JFXTextField>
                                                       <JFXComboBox prefWidth="150.0">
                                                          <HBox.margin>
                                                             <Insets left="10.0" top="10.0" />
@@ -441,15 +444,18 @@
                                                 <HBox prefHeight="100.0" prefWidth="972.0">
                                                    <children>
                                                       <VBox prefHeight="200.0" prefWidth="200.0">
-                                                         <children>
-                                                            <Label text="Min" />
-                                                            <TextField />
-                                                         </children>
                                                          <padding>
                                                             <Insets left="5.0" right="5.0" top="8.0" />
                                                          </padding>
+                                                         <children>
+                                                            <JFXTextField fx:id="tfMinAmort" labelFloat="true" promptText="Min" text="0">
+                                                               <padding>
+                                                                  <Insets top="15.0" />
+                                                               </padding>
+                                                            </JFXTextField>
+                                                         </children>
                                                       </VBox>
-                                                      <JFXSlider blockIncrement="1.0" majorTickUnit="20000.0" max="150000.0" min="1.0" minorTickCount="9999" prefWidth="600.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="100000.0">
+                                                      <JFXSlider fx:id="slAmort" blockIncrement="1.0" majorTickUnit="20000.0" max="150000.0" min="1.0" minorTickCount="9999" prefWidth="600.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="100000.0">
                                                          <padding>
                                                             <Insets left="8.0" right="8.0" top="25.0" />
                                                          </padding>
@@ -458,13 +464,16 @@
                                                          </HBox.margin>
                                                       </JFXSlider>
                                                       <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0">
-                                                         <children>
-                                                            <Label text="Máx" />
-                                                            <TextField />
-                                                         </children>
                                                          <padding>
                                                             <Insets left="5.0" right="5.0" top="8.0" />
                                                          </padding>
+                                                         <children>
+                                                            <JFXTextField fx:id="tfMaxAmort" labelFloat="true" promptText="Max" text="150000">
+                                                               <padding>
+                                                                  <Insets top="15.0" />
+                                                               </padding>
+                                                            </JFXTextField>
+                                                         </children>
                                                       </VBox>
                                                    </children>
                                                 </HBox>

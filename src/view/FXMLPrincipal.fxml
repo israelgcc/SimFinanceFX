@@ -410,7 +410,7 @@
                                              <children>
                                                 <HBox prefHeight="40.0" prefWidth="972.0">
                                                    <children>
-                                                      <JFXTextField fx:id="tfAmortizacao" text="100000">
+                                                      <JFXTextField fx:id="tfAmort" text="100000">
                                                          <font>
                                                             <Font name="System Bold" size="15.0" />
                                                          </font>
