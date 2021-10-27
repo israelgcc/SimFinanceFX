@@ -16,8 +16,8 @@ public class  Resumo{
     
     
     private final SimpleStringProperty campo;
-    private final SimpleDoubleProperty sac;
-    private final SimpleDoubleProperty price;
+    private final SimpleStringProperty sac;
+    private final SimpleStringProperty price;
     private final SimpleStringProperty diferenca;
     private final SimpleStringProperty perc;
 
@@ -29,19 +29,19 @@ public class  Resumo{
         return campo.get();
     }
     
-    public Resumo(String campo, Double sac, double price, String diferenca, String perc) {
+    public Resumo(String campo, String sac, String price, String diferenca, String perc) {
         this.campo = new SimpleStringProperty(campo);
-        this.sac = new SimpleDoubleProperty(sac);
-        this.price = new SimpleDoubleProperty(price);
+        this.sac = new SimpleStringProperty(sac);
+        this.price = new SimpleStringProperty(price);
         this.diferenca = new SimpleStringProperty(diferenca);
         this.perc = new SimpleStringProperty(perc);
     }
 
-    public double getSac() {
+    public String getSac() {
         return sac.get();
     }
 
-    public double getPrice() {
+    public String getPrice() {
         return price.get();
     }
 
@@ -53,11 +53,11 @@ public class  Resumo{
         return perc.get();
     }
 
-    public void setSac(double sac) {
+    public void setSac(String sac) {
         this.sac.set(sac);
     }
 
-    public void setPrice(double price) {
+    public void setPrice(String price) {
         this.price.set(price);
     }
 

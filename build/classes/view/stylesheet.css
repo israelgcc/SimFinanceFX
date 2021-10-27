@@ -67,3 +67,7 @@ and open the template in the editor.
     -fx-border-color: transparent;
     -fx-background-color:#FFFFFF;   
 }
+
+.coluna {
+  -fx-alignment: CENTER_RIGHT;
+}

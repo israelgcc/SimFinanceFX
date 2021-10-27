@@ -16,31 +16,31 @@ import javafx.beans.property.SimpleStringProperty;
 public class  Simulacao{
     
     
-    private final SimpleIntegerProperty parcela;
+    private final SimpleStringProperty parcela;
     private final SimpleStringProperty dtData;
-    private final SimpleDoubleProperty prestacao;
-    private final SimpleDoubleProperty principal;
-    private final SimpleDoubleProperty juros;
-    private final SimpleDoubleProperty saldo;
+    private final SimpleStringProperty prestacao;
+    private final SimpleStringProperty principal;
+    private final SimpleStringProperty juros;
+    private final SimpleStringProperty saldo;
 
-    public void setSaldo(double saldo) {
+    public void setSaldo(String saldo) {
         this.saldo.set(saldo);
     }
 
-    public double getSaldo() {
+    public String getSaldo() {
         return saldo.get();
     }
     
-    public Simulacao(int parcela, String dtData, Double prestacao, double principal, double juros, double saldo) {
-        this.parcela = new SimpleIntegerProperty(parcela);
+    public Simulacao(String parcela, String dtData, String prestacao, String principal, String juros, String saldo) {
+        this.parcela = new SimpleStringProperty(parcela);
         this.dtData = new SimpleStringProperty(dtData);
-        this.prestacao = new SimpleDoubleProperty(prestacao);
-        this.principal = new SimpleDoubleProperty(principal);
-        this.juros = new SimpleDoubleProperty(juros);
-        this.saldo = new SimpleDoubleProperty(saldo);
+        this.prestacao = new SimpleStringProperty(prestacao);
+        this.principal = new SimpleStringProperty(principal);
+        this.juros = new SimpleStringProperty(juros);
+        this.saldo = new SimpleStringProperty(saldo);
     }
 
-    public int getParcela() {
+    public String getParcela() {
         return parcela.get();
     }
 
@@ -48,19 +48,19 @@ public class  Simulacao{
         return dtData.get();
     }
 
-    public double getPrestacao() {
+    public String getPrestacao() {
         return prestacao.get();
     }
 
-    public double getPrincipal() {
+    public String getPrincipal() {
         return principal.get();
     }
 
-    public double getJuros() {
+    public String getJuros() {
         return juros.get();
     }
 
-    public void setParcela(int parcela) {
+    public void setParcela(String parcela) {
         this.parcela.set(parcela);
     }
 
@@ -68,15 +68,15 @@ public class  Simulacao{
         this.dtData.set(dtData);
     }
 
-    public void setPrestacao(double prestacao) {
+    public void setPrestacao(String prestacao) {
         this.prestacao.set(prestacao);
     }
 
-    public void setPrincipal(double principal) {
+    public void setPrincipal(String principal) {
         this.principal.set(principal);
     }
 
-    public void setJuros(double juros) {
+    public void setJuros(String juros) {
         this.juros.set(juros);
     }
     
