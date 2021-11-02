@@ -9,10 +9,14 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXSlider;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.validation.NumberValidator;
+import java.io.File;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -23,16 +27,27 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import util.Resumo;
 import util.Simulacao;
 import util.Util;
@@ -75,12 +90,6 @@ public class FXMLPrincipalController implements Initializable {
     
     @FXML
     private JFXSlider slEntrada;
-    
-    @FXML
-    private JFXTextField tfMinEntrada; 
-
-    @FXML
-    private JFXTextField tfMaxEntrada;
 
     @FXML
     private JFXTextField tfEntrada;
@@ -88,8 +97,7 @@ public class FXMLPrincipalController implements Initializable {
     @FXML
     private JFXSlider slTaxa;
     
-    @FXML
-    private JFXTextField tfMinTaxa; 
+    
 
     @FXML
     private JFXTextField tfMaxTaxa;
@@ -100,11 +108,7 @@ public class FXMLPrincipalController implements Initializable {
     @FXML
     private JFXSlider slAmort;
     
-    @FXML
-    private JFXTextField tfMinAmort; 
 
-    @FXML
-    private JFXTextField tfMaxAmort;
 
     @FXML
     private JFXTextField tfAmort;
@@ -206,8 +210,27 @@ public class FXMLPrincipalController implements Initializable {
     double valTaxa;
     String frequencia;        
     String tipo;
-    double aporte;    
+    double aporte;
+
+    @FXML
+    private LineChart<?,?> grafico1;
+    @FXML
+    private BarChart<?, ?> grafico2;    
     
+    @FXML
+    private CategoryAxis catAxisParcelas;
+    @FXML
+    private NumberAxis numberAxisPrestacao;
+    
+    @FXML
+    private NumberAxis grafico2y;
+
+    @FXML
+    private CategoryAxis grafico2x;
+    
+
+    
+        
     public void carrega()
     {
         qtdTempo = Integer.parseInt(lblTempo.getText());
@@ -217,12 +240,22 @@ public class FXMLPrincipalController implements Initializable {
         frequencia = (String)(cbFreq.getSelectionModel().getSelectedItem());        
         tipo = (String)(cbTipo.getSelectionModel().getSelectedItem());
         aporte = Double.parseDouble(tfAmort.getText());
+        System.out.println("Carrega: "+valBem);
     }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         //Variaveis
+        
+        configureTextFieldToAcceptOnlyDecimalValues(tfTaxa);
+        configureTextFieldToAcceptOnlyDecimalValues(tfAmort);
+        configureTextFieldToAcceptOnlyDecimalValues(tfEntrada);
+        configureTextFieldToAcceptOnlyDecimalValues(tfMaxTaxa);
+        configureTextFieldToAcceptOnlyDecimalValues(tfMaxValorBem);
+        configureTextFieldToAcceptOnlyDecimalValues(tfMinValorBem);
+        configureTextFieldToAcceptOnlyDecimalValues(tfValorBem);
+        
         ObservableList<String> freq = FXCollections.observableArrayList("Anual","Mensal");
         ObservableList<String> tip = FXCollections.observableArrayList("Saldo Devedor","Parcelas");
         
@@ -243,7 +276,7 @@ public class FXMLPrincipalController implements Initializable {
         ToggleGroup groupTaxa = new ToggleGroup();
         rbTaxaAno.setToggleGroup(groupTaxa);
         rbTaxaMes.setToggleGroup(groupTaxa);
-        rbTaxaAno.setSelected(true);
+        rbTaxaMes.setSelected(true);
         
         rbTempoMes.selectedProperty().addListener((observable, oldValue, newValue) ->
         {
@@ -270,22 +303,23 @@ public class FXMLPrincipalController implements Initializable {
             if (newValue==true)
             {
                 double auxTaxa = Double.valueOf(slTaxa.getValue());
-                slTaxa.setMin(0);
-                slTaxa.setMax(10);
+                //slTaxa.setMin(0);
+                //slTaxa.setMax(10);
                 double termo1 = 1.0+(auxTaxa/100.0);
                 double expoente = 1.0/12.0;
                 double termo2 = Math.pow(termo1,expoente);
                 termo2 = (termo2 - 1.0)*100.0;
                 termo2 = Util.truncar(termo2);
-                slTaxa.setValue(termo2);
+                //slTaxa.setValue(termo2);
+                slTaxa.setValue(Double.valueOf(String.format("%.4f", termo2).replace(",", ".")));
             }
             else
             {
                 double auxTaxa = Double.valueOf(slTaxa.getValue());
-                slTaxa.setMin(0);
-                slTaxa.setMax(215);
+                //slTaxa.setMin(0);
+                //slTaxa.setMax(215);
                 auxTaxa = Math.pow((1+auxTaxa/100), 12)-1;
-                slTaxa.setValue(auxTaxa*100);
+                slTaxa.setValue(Double.valueOf(String.format("%.4f", auxTaxa*100).replace(",", ".")));
             }
         });
         
@@ -297,49 +331,80 @@ public class FXMLPrincipalController implements Initializable {
         });
         
         tfValorBem.textProperty().addListener((observable, oldValue, newValue) ->
-        slValorBem.setValue(Math.abs(Double.valueOf(newValue))));
+        {
+            formataTextField(newValue,oldValue,slValorBem,tfValorBem,slEntrada,slAmort);
+        });
         
+        
+    
         tfMinValorBem.textProperty().addListener((observable, oldValue, newValue) ->
-        slValorBem.setMin(Math.abs(Double.valueOf(newValue))));
+        {
+            formataTextFieldMin(newValue,oldValue,slValorBem,tfMinValorBem,(Double.valueOf(tfValorBem.getText())));
+        });
         
         tfMaxValorBem.textProperty().addListener((observable, oldValue, newValue) ->
         slValorBem.setMax(Math.abs(Double.valueOf(newValue))));
         
         slEntrada.valueProperty().addListener((observable, oldValue, newValue) ->
-        tfEntrada.setText(String.valueOf(Math.abs(newValue.intValue()))));
+        {
+            tfEntrada.setText(String.valueOf(Math.abs(newValue.intValue())));
+            carrega();
+            calcular(qtdTempo,valBem,valEntrada,valTaxa,frequencia,aporte,tipo);
+        });
+        
         
         tfEntrada.textProperty().addListener((observable, oldValue, newValue) ->
         slEntrada.setValue(Math.abs(Double.valueOf(newValue))));
         
-        tfMinEntrada.textProperty().addListener((observable, oldValue, newValue) ->
-        slEntrada.setMin(Math.abs(Double.valueOf(newValue))));
-        
-        tfMaxEntrada.textProperty().addListener((observable, oldValue, newValue) ->
-        slEntrada.setMax(Math.abs(Double.valueOf(newValue))));
         
         slTaxa.valueProperty().addListener((observable, oldValue, newValue) ->
-        tfTaxa.setText(String.format("%.4f",newValue.doubleValue())));
+        {
+                if (rbTaxaAno.isSelected())
+                    tfTaxa.setText(String.valueOf(newValue).replace(".", ","));
+                else
+                    tfTaxa.setText(String.valueOf(newValue).replace(".", ","));
+                carrega();
+                calcular(qtdTempo,valBem,valEntrada,valTaxa,frequencia,aporte,tipo);
+            
+            
+        });
         
         tfTaxa.textProperty().addListener((observable, oldValue, newValue) ->
-        slTaxa.setValue(Double.valueOf(newValue.replace(",","."))));
+        {
+            
+            if (newValue.length()>0)
+            {
+                slTaxa.setValue(Double.valueOf(newValue.replace(",",".")));
+                carrega();
+                calcular(qtdTempo,valBem,valEntrada,valTaxa,frequencia,aporte,tipo);
+            }
+            else
+            {
+                tfTaxa.setText(oldValue);
+                carrega();
+                calcular(qtdTempo,valBem,valEntrada,valTaxa,frequencia,aporte,tipo);
+            }
+        });
         
-        tfMinTaxa.textProperty().addListener((observable, oldValue, newValue) ->
-        slTaxa.setMin(Math.abs(Double.valueOf(newValue))));
+        
+        
+        
         
         tfMaxTaxa.textProperty().addListener((observable, oldValue, newValue) ->
         slTaxa.setMax(Math.abs(Double.valueOf(newValue))));
         
         slAmort.valueProperty().addListener((observable, oldValue, newValue) ->
-        tfAmort.setText(String.valueOf(Math.abs(newValue.intValue()))));
+        {
+            tfAmort.setText(String.valueOf(Math.abs(newValue.intValue())));
+            carrega();
+            calcular(qtdTempo,valBem,valEntrada,valTaxa,frequencia,aporte,tipo);
+        });
+        
         
         tfAmort.textProperty().addListener((observable, oldValue, newValue) ->
         slAmort.setValue(Math.abs(Double.valueOf(newValue))));
         
-        tfMinAmort.textProperty().addListener((observable, oldValue, newValue) ->
-        slAmort.setMin(Math.abs(Double.valueOf(newValue))));
-        
-        tfMaxAmort.textProperty().addListener((observable, oldValue, newValue) ->
-        slAmort.setMax(Math.abs(Double.valueOf(newValue))));
+
         
         
         colResCampos.setCellValueFactory(
@@ -392,13 +457,44 @@ public class FXMLPrincipalController implements Initializable {
                 new PropertyValueFactory<>("principal"));
         
         
+        
+        
     }
 
     public void calcular(int qtdTempo,double valBem,double valEntrada, double valTaxa, String frequencia, double aporte, String tipo)
     {
-                
+        double aporteSac = 0;
+        double aportePrice = 0;
         if (frequencia.equals("Anual"))
-            aporte=aporte/12.0;
+        {
+            aporteSac=aporte/12.0;
+            aportePrice=aporte/12.0;
+        }
+        else
+        {
+            aporteSac=aporte;
+            aportePrice=aporte;
+        }
+        
+        double valTaxaSac = 0;
+        double valTaxaPrice = 0;
+        if (rbTaxaAno.isSelected())
+        {
+            double termo1 = 1.0+(valTaxa/100.0);
+            double expoente = 1.0/12.0;
+            double termo2 = Math.pow(termo1,expoente);
+            termo2 = (termo2 - 1.0)*100.0;
+            termo2 = Util.truncar(termo2);
+             valTaxaSac = termo2;
+             valTaxaPrice = termo2;
+            
+        }
+        else
+        {
+            valTaxaSac=valTaxa;
+            valTaxaPrice=valTaxa;
+        }
+            
         double valSaldoSac = valBem-valEntrada;
         
         //SAC
@@ -412,7 +508,7 @@ public class FXMLPrincipalController implements Initializable {
         int ultParcelaSac = 0;
         double somaAportesSac = 0;
         double somaPrestacoesSac = 0;
-        double valTaxaSac = valTaxa;
+        
         for(int i = 0;i<qtdTempo;i++)
         {
             if (valSaldoSac>0)
@@ -430,25 +526,26 @@ public class FXMLPrincipalController implements Initializable {
                     String.format("%.2f",jurosSac),String.format("%.2f",valSaldoSac)));
              
             //chart.addItemSAC(parcela, prestacao);
-            if (valSaldoSac>=(valorPrincipalOriginalSac+aporte))
+            if (valSaldoSac>=(valorPrincipalOriginalSac+aporteSac))
             {
                 if (tipo=="Saldo Devedor")
                 {
-                    valSaldoSac=valSaldoSac-valorPrincipalOriginalSac-aporte;
+                    valSaldoSac=valSaldoSac-valorPrincipalOriginalSac-aporteSac;
                 }
                 else
                 {
-                    valSaldoSac=valSaldoSac-valorPrincipalOriginalSac-aporte;
+                    valSaldoSac=valSaldoSac-valorPrincipalOriginalSac-aporteSac;
                     valorPrincipalOriginalSac = valSaldoSac/(qtdTempo-parcelaSac+1);
                 }
-                somaAportesSac = somaAportesSac+aporte;
+                ultParcelaSac = i;
+                somaAportesSac = somaAportesSac+aporteSac;
                 somaPrestacoesSac = somaPrestacoesSac+prestacaoSac;
             }
             else 
             {   
-                aporte=valSaldoSac-valorPrincipalOriginalSac;
-                somaAportesSac = somaAportesSac+aporte;
-                valSaldoSac=valSaldoSac-valorPrincipalOriginalSac-aporte;
+                aporteSac=valSaldoSac-valorPrincipalOriginalSac;
+                somaAportesSac = somaAportesSac+aporteSac;
+                valSaldoSac=valSaldoSac-valorPrincipalOriginalSac-aporteSac;
                 somaPrestacoesSac = somaPrestacoesSac+prestacaoSac;
                 /*chartBarra.addItem(somaPrestacoes, "SAC", "Prestações");
                 chartBarra.addItem(somaAportes, "SAC", "Aportes");
@@ -464,12 +561,17 @@ public class FXMLPrincipalController implements Initializable {
         double ultSac = ultParcelaSac;
         
         //PRICE
+        
         double saldoPRICE = valBem-valEntrada;
         int parcelaPRICE = 0;
         Date dtDataPRICE = new Date();
-        double parc1 = (Math.pow((1+(valTaxa/100)), qtd)*(valTaxa/100));
-        double parc2 = (Math.pow((1+(valTaxa/100)), qtd)-1);
-        double valorPrincipalOriginalPRICE = (saldoPRICE*(Math.pow((1+(valTaxa/100)), qtd)*(valTaxa/100))/(Math.pow((1+(valTaxa/100)), qtd)-1));
+        System.out.println(valTaxaPrice);
+        double parc1 = (Math.pow((1+(valTaxaPrice/100)), qtd)*(valTaxaPrice/100));
+        System.out.println("parc1 "+parc1);
+        double parc2 = (Math.pow((1+(valTaxaPrice/100)), qtd)-1);
+        System.out.println("parc2 "+parc2);
+        double valorPrincipalOriginalPRICE = (saldoPRICE*(Math.pow((1+(valTaxaPrice/100)), qtd)*(valTaxaPrice/100))/(Math.pow((1+(valTaxaPrice/100)), qtd)-1));
+        System.out.println("valor "+valorPrincipalOriginalPRICE);
         ArrayList<Simulacao> simPRICE = new ArrayList<Simulacao>();        
         double prestacaoPRICE = 0;
         double jurosPRICE = 0;
@@ -480,7 +582,7 @@ public class FXMLPrincipalController implements Initializable {
         for(int i = 0;i<qtd;i++)
         {
             if (saldoPRICE>0)
-            jurosPRICE = saldoPRICE*valTaxa/100;
+            jurosPRICE = saldoPRICE*valTaxaPrice/100;
             else
                 jurosPRICE=0;
             amortizacao = valorPrincipalOriginalPRICE-jurosPRICE;
@@ -494,27 +596,29 @@ public class FXMLPrincipalController implements Initializable {
             simPRICE.add(new Simulacao(String.valueOf(parcelaPRICE),data,String.format("%.2f",prestacaoPRICE),String.format("%.2f",amortizacao),
                     String.format("%.2f",jurosPRICE),String.format("%.2f",saldoPRICE)));
             //chart.addItemPRICE(parcelaPRICE, prestacaoPRICE);
-            if (saldoPRICE>=(amortizacao+aporte))
+            if (saldoPRICE>=(amortizacao+aportePrice))
             {
                 //chart.addItemDataset(prestacaoPRICE, "PRICE", data);
                 if (tipo=="Saldo Devedor")
                 {
-                    saldoPRICE=saldoPRICE-amortizacao-aporte;
+                    saldoPRICE=saldoPRICE-amortizacao-aportePrice;
                 }
                 else
                 {
-                    saldoPRICE=saldoPRICE-amortizacao-aporte;
-                    valorPrincipalOriginalPRICE=(saldoPRICE*(Math.pow((1+(valTaxa/100)), (qtd-parcelaPRICE+1))*(valTaxa/100))/(Math.pow((1+(valTaxa/100)), (qtd-parcelaPRICE+1))-1));
+                    saldoPRICE=saldoPRICE-amortizacao-aportePrice;
+                    valorPrincipalOriginalPRICE=(saldoPRICE*(Math.pow((1+(valTaxaPrice/100)), (qtd-parcelaPRICE+1))*(valTaxaPrice/100))/(Math.pow((1+(valTaxaPrice/100)), (qtd-parcelaPRICE+1))-1));
                 }
-                    
-                somaAportesPRICE = somaAportesPRICE+aporte;
+                ultParcelaPRICE = i;    
+                somaAportesPRICE = somaAportesPRICE+aportePrice;
+                //System.out.println("somaAportesPRICE: "+somaAportesPRICE);
                 somaPrestacoesPRICE = somaPrestacoesPRICE+prestacaoPRICE;
             }
             else 
             {   
                 aporte=saldoPRICE-amortizacao;
-                somaAportesPRICE = somaAportesPRICE+aporte;
-                saldoPRICE=saldoPRICE-amortizacao-aporte;
+                somaAportesPRICE = somaAportesPRICE+aportePrice;
+                //System.out.println("somaAportesPRICEx: "+somaAportesPRICE);
+                saldoPRICE=saldoPRICE-amortizacao-aportePrice;
                 somaPrestacoesPRICE = somaPrestacoesPRICE+prestacaoPRICE;
                 ultParcelaPRICE = i;
                 /*chartBarra.addItem(somaPrestacoesPRICE, "PRICE", "Prestações");
@@ -533,7 +637,7 @@ public class FXMLPrincipalController implements Initializable {
         tabelaResumo.getItems().add(new Resumo("Anos Previstos", String.format("%.0f",(qtd/12)),String.format("%.0f",(qtd/12)),"",""));
         tabelaResumo.getItems().add(new Resumo("Anos Pagando", String.format("%.0f",(ultSac/12)),String.format("%.0f",(ultPrice/12)),"",""));
         tabelaResumo.getItems().add(new Resumo("Anos Amortizados", String.format("%.0f",(qtd-ultSac)/12), String.format("%.0f",(qtd-ultPrice)/12),"",""));
-        tabelaResumo.getItems().add(new Resumo("Valor Principal", String.format("%.2f",prestacaoSac), String.format("%.2f",prestacaoPRICE),"",""));
+        tabelaResumo.getItems().add(new Resumo("Valor Médio das Prestações", String.format("%.2f",somaPrestacoesSac/(ultSac+1)), String.format("%.2f",somaPrestacoesPRICE/(ultPrice+1)),"",""));
         tabelaResumo.getItems().add(new Resumo("Total Aportado", String.format("%.2f",somaAportesSac), String.format("%.2f",somaAportesPRICE),"",""));
         tabelaResumo.getItems().add(new Resumo("Total Prestações", String.format("%.2f",somaPrestacoesSac), String.format("%.2f",somaPrestacoesPRICE),"",""));
         tabelaResumo.getItems().add(new Resumo("Total Pago", String.format("%.2f",somaPrestacoesSac+somaAportesSac+valEntrada), String.format("%.2f",somaPrestacoesPRICE+somaAportesPRICE+valEntrada),"",""));
@@ -545,9 +649,112 @@ public class FXMLPrincipalController implements Initializable {
         tabelaDetPRICE.getItems().addAll(simPRICE);
         
         
-                
+        
+        XYChart.Series sac = new XYChart.Series();
+        sac.setName("SAC");
+        for(int i=0;i<simSac.size();i++)
+        {
+            sac.getData().add(new XYChart.Data(simSac.get(i).getParcela(), Double.valueOf(simSac.get(i).getPrestacao().replace(",", "."))));
+        }
+        
+        XYChart.Series price = new XYChart.Series();
+        price.setName("PRICE");
+        for(int i=0;i<simPRICE.size();i++)
+        {
+            price.getData().add(new XYChart.Data(simPRICE.get(i).getParcela(), Double.valueOf(simPRICE.get(i).getPrestacao().replace(",", "."))));
+        }
+        
+        grafico1.getData().clear();
+        grafico1.getData().addAll(sac,price);
+        
+        numberAxisPrestacao.setUpperBound(valorPrincipalOriginalPRICE+1000);
+        
+        XYChart.Series sacBarra = new XYChart.Series<>();
+        sacBarra.setName("SAC");
+        sacBarra.getData().add(new XYChart.Data("APORTE", somaAportesSac));
+        sacBarra.getData().add(new XYChart.Data("PARCELAS", somaPrestacoesSac));
+        sacBarra.getData().add(new XYChart.Data("PAGO", somaPrestacoesSac+somaAportesSac+valEntrada));
+        
+        XYChart.Series priceBarra = new XYChart.Series<>();
+        priceBarra.setName("PRICE");
+        priceBarra.getData().add(new XYChart.Data("APORTE", somaAportesPRICE));
+        priceBarra.getData().add(new BarChart.Data("PARCELAS", somaPrestacoesPRICE));
+        priceBarra.getData().add(new BarChart.Data("PAGO", somaPrestacoesPRICE+somaAportesPRICE+valEntrada));
+        grafico2.getData().clear();
+        grafico2.getData().addAll(sacBarra,priceBarra);
+        
+        grafico2y.setUpperBound(somaPrestacoesPRICE+somaAportesPRICE+valEntrada+1000);
     }
     
+    public void formataTextField(String newValue, String oldValue, JFXSlider slider, JFXTextField textfield, JFXSlider sliderEntrada, JFXSlider sliderAmort)
+    {
+        if (!newValue.isEmpty())
+            {
+                if((newValue.matches("^[0-9]*[.]{0,1}[0-9]*$")))
+                {
+                    slider.setValue(Math.abs(Double.valueOf(newValue)));
+                    sliderEntrada.setMax(Math.abs(Double.valueOf(newValue))*80/100);
+                    sliderAmort.setMax(Math.abs(Double.valueOf(newValue))*80/100);
+                }
+                else
+                {
+                    newValue=oldValue;
+                    textfield.setText(String.valueOf(oldValue));
+                }
+            }
+            else
+            {
+                newValue=oldValue;
+                textfield.setText(String.valueOf(0));
+            }
+    }
+    
+    public void formataTextFieldMin(String newValue, String oldValue, JFXSlider slider, JFXTextField textfield, double valorMaximo)
+    {
+        if (!newValue.isEmpty())
+            {
+                if((newValue.matches("^[0-9]*[.]{0,1}[0-9]*$")))
+                {
+                    if (valorMaximo<Math.abs(Double.valueOf(newValue)))
+                    {
+                        slider.setMin(Math.abs(valorMaximo-1)); 
+                        textfield.setText(String.format("%.0f",(valorMaximo-1)));
+                    }
+                    else
+                        slider.setMin(Math.abs(Double.valueOf(newValue)));
+                }
+                else
+                {
+                    newValue=oldValue;
+                    textfield.setText(String.valueOf(oldValue));
+                }
+            }
+            else
+            {
+                newValue=oldValue;
+                textfield.setText(String.valueOf(oldValue));
+            }
+    }
+    
+    public static void configureTextFieldToAcceptOnlyDecimalValues(JFXTextField textField) {
+
+        DecimalFormat format = new DecimalFormat("#");
+
+        final TextFormatter<Object> decimalTextFormatter = new TextFormatter<>(change -> {
+            if (change.getControlNewText().isEmpty()) {
+                return change;
+            }
+            ParsePosition parsePosition = new ParsePosition(0);
+            Object object = format.parse(change.getControlNewText(), parsePosition);
+
+            if (object == null || parsePosition.getIndex() < change.getControlNewText().length()) {
+                return null;
+            } else {
+                return change;
+            }
+        });
+        textField.setTextFormatter(decimalTextFormatter);
+    }
     
     
 }

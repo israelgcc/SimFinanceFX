@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.web.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 <?import com.jfoenix.validation.*?>
@@ -25,9 +28,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" minHeight="600.0" minWidth="1420.0" prefHeight="800.0" prefWidth="1420.0" styleClass="parent" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.FXMLPrincipalController">
+<AnchorPane id="AnchorPane" minHeight="820.0" minWidth="1420.0" prefHeight="800.0" prefWidth="1420.0" styleClass="parent" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.FXMLPrincipalController">
    <children>
-      <BorderPane AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <BorderPane prefHeight="800.0" prefWidth="1420.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
             <VBox minHeight="-Infinity" minWidth="-Infinity" BorderPane.alignment="TOP_LEFT">
                <opaqueInsets>
@@ -71,7 +74,7 @@
                                              <children>
                                                 <HBox prefHeight="40.0" prefWidth="200.0">
                                                    <children>
-                                                      <Label fx:id="lblTempo" prefWidth="280.0" styleClass="label-real" stylesheets="@stylesheet.css" text="320">
+                                                      <Label fx:id="lblTempo" prefWidth="280.0" styleClass="label-real" stylesheets="@stylesheet.css" text="360">
                                                          <padding>
                                                             <Insets bottom="10.0" left="20.0" top="10.0" />
                                                          </padding>
@@ -86,7 +89,7 @@
                                                       </ImageView>
                                                    </children>
                                                 </HBox>
-                                                <JFXSlider fx:id="slTempo" blockIncrement="1.0" majorTickUnit="50.0" max="420.0" min="1.0" minorTickCount="50" showTickLabels="true" showTickMarks="true" value="320.0">
+                                                <JFXSlider fx:id="slTempo" blockIncrement="1.0" majorTickUnit="50.0" max="420.0" min="1.0" minorTickCount="50" showTickLabels="true" showTickMarks="true" value="360.0">
                                                    <VBox.margin>
                                                       <Insets left="10.0" right="10.0" top="20.0" />
                                                    </VBox.margin>
@@ -149,7 +152,7 @@
                                                    <children>
                                                       <VBox prefHeight="200.0" prefWidth="100.0">
                                                          <children>
-                                                            <JFXTextField fx:id="tfMinValorBem" labelFloat="true" promptText="Min" text="0">
+                                                            <JFXTextField fx:id="tfMinValorBem" labelFloat="true" promptText="Min" text="50000">
                                                                <VBox.margin>
                                                                   <Insets top="15.0" />
                                                                </VBox.margin>
@@ -159,7 +162,7 @@
                                                             <Insets left="5.0" right="5.0" top="8.0" />
                                                          </padding>
                                                       </VBox>
-                                                      <JFXSlider fx:id="slValorBem" blockIncrement="1.0" majorTickUnit="20000.0" max="300000.0" min="1.0" minorTickCount="20000" prefWidth="280.0" showTickLabels="true" showTickMarks="true" value="300000.0">
+                                                      <JFXSlider fx:id="slValorBem" blockIncrement="1.0" majorTickUnit="20000.0" max="300000.0" min="50000.0" minorTickCount="20000" prefWidth="280.0" showTickLabels="true" showTickMarks="true" value="300000.0">
                                                          <HBox.margin>
                                                             <Insets top="5.0" />
                                                          </HBox.margin>
@@ -240,38 +243,14 @@
                                                 </HBox>
                                                 <HBox prefHeight="100.0" prefWidth="200.0">
                                                    <children>
-                                                      <VBox prefHeight="200.0" prefWidth="100.0">
-                                                         <padding>
-                                                            <Insets left="5.0" right="5.0" top="8.0" />
-                                                         </padding>
-                                                         <children>
-                                                            <JFXTextField fx:id="tfMinEntrada" labelFloat="true" promptText="Min" text="0">
-                                                               <VBox.margin>
-                                                                  <Insets top="15.0" />
-                                                               </VBox.margin>
-                                                            </JFXTextField>
-                                                         </children>
-                                                      </VBox>
-                                                      <JFXSlider fx:id="slEntrada" blockIncrement="1.0" majorTickUnit="20000.0" max="150000.0" min="1.0" minorTickCount="9999" prefWidth="280.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="100000.0">
+                                                      <JFXSlider fx:id="slEntrada" blockIncrement="1.0" majorTickUnit="20000.0" max="150000.0" minorTickCount="9999" prefHeight="63.0" prefWidth="471.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="100000.0">
                                                          <padding>
                                                             <Insets left="8.0" right="8.0" top="25.0" />
                                                          </padding>
                                                          <HBox.margin>
-                                                            <Insets top="5.0" />
+                                                            <Insets left="5.0" right="5.0" top="5.0" />
                                                          </HBox.margin>
                                                       </JFXSlider>
-                                                      <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
-                                                         <padding>
-                                                            <Insets left="5.0" right="5.0" top="8.0" />
-                                                         </padding>
-                                                         <children>
-                                                            <JFXTextField fx:id="tfMaxEntrada" labelFloat="true" promptText="Max" text="150000">
-                                                               <VBox.margin>
-                                                                  <Insets top="15.0" />
-                                                               </VBox.margin>
-                                                            </JFXTextField>
-                                                         </children>
-                                                      </VBox>
                                                    </children>
                                                 </HBox>
                                              </children>
@@ -321,7 +300,7 @@
                                              <children>
                                                 <HBox prefHeight="40.0" prefWidth="200.0">
                                                    <children>
-                                                      <JFXTextField fx:id="tfTaxa" text="7,2">
+                                                      <JFXTextField fx:id="tfTaxa" text="0,6821">
                                                          <font>
                                                             <Font name="System Bold" size="15.0" />
                                                          </font>
@@ -344,19 +323,7 @@
                                                 </HBox>
                                                 <HBox prefHeight="100.0" prefWidth="200.0">
                                                    <children>
-                                                      <VBox prefHeight="200.0" prefWidth="100.0">
-                                                         <padding>
-                                                            <Insets left="5.0" right="5.0" top="8.0" />
-                                                         </padding>
-                                                         <children>
-                                                            <JFXTextField fx:id="tfMinTaxa" labelFloat="true" promptText="Min" text="0">
-                                                               <VBox.margin>
-                                                                  <Insets top="15.0" />
-                                                               </VBox.margin>
-                                                            </JFXTextField>
-                                                         </children>
-                                                      </VBox>
-                                                      <JFXSlider fx:id="slTaxa" blockIncrement="0.01" majorTickUnit="10.0" max="20.0" min="1.0" minorTickCount="9" prefWidth="280.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="7.0">
+                                                      <JFXSlider fx:id="slTaxa" blockIncrement="1.0E-4" majorTickUnit="0.01" max="10.0" min="1.0E-4" minorTickCount="1" prefHeight="53.0" prefWidth="275.0" snapToTicks="true" value="0.7974">
                                                          <padding>
                                                             <Insets left="8.0" right="8.0" top="25.0" />
                                                          </padding>
@@ -369,7 +336,7 @@
                                                             <Insets left="5.0" right="5.0" top="8.0" />
                                                          </padding>
                                                          <children>
-                                                            <JFXTextField fx:id="tfMaxTaxa" labelFloat="true" promptText="Max" text="20">
+                                                            <JFXTextField fx:id="tfMaxTaxa" labelFloat="true" promptText="Max" text="10">
                                                                <VBox.margin>
                                                                   <Insets top="15.0" />
                                                                </VBox.margin>
@@ -464,33 +431,19 @@
                                                          <padding>
                                                             <Insets left="5.0" right="5.0" top="8.0" />
                                                          </padding>
-                                                         <children>
-                                                            <JFXTextField fx:id="tfMinAmort" labelFloat="true" promptText="Min" text="0">
-                                                               <padding>
-                                                                  <Insets top="15.0" />
-                                                               </padding>
-                                                            </JFXTextField>
-                                                         </children>
                                                       </VBox>
-                                                      <JFXSlider fx:id="slAmort" blockIncrement="1.0" majorTickUnit="20000.0" max="150000.0" min="1.0" minorTickCount="9999" prefWidth="600.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="100000.0">
+                                                      <JFXSlider fx:id="slAmort" blockIncrement="1.0" majorTickUnit="20000.0" max="150000.0" minorTickCount="9999" prefHeight="63.0" prefWidth="1133.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="1000.0">
                                                          <padding>
                                                             <Insets left="8.0" right="8.0" top="25.0" />
                                                          </padding>
                                                          <HBox.margin>
-                                                            <Insets top="5.0" />
+                                                            <Insets left="5.0" right="5.0" top="5.0" />
                                                          </HBox.margin>
                                                       </JFXSlider>
                                                       <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0">
                                                          <padding>
                                                             <Insets left="5.0" right="5.0" top="8.0" />
                                                          </padding>
-                                                         <children>
-                                                            <JFXTextField fx:id="tfMaxAmort" labelFloat="true" promptText="Max" text="150000">
-                                                               <padding>
-                                                                  <Insets top="15.0" />
-                                                               </padding>
-                                                            </JFXTextField>
-                                                         </children>
                                                       </VBox>
                                                    </children>
                                                 </HBox>
@@ -520,142 +473,165 @@
             <Insets left="5.0" right="5.0" />
          </padding>
          <center>
-            <BorderPane prefHeight="450.0" prefWidth="1380.0" BorderPane.alignment="CENTER">
-               <center>
-                  <JFXTabPane prefHeight="262.0" prefWidth="1380.0" BorderPane.alignment="CENTER">
-                     <tabs>
-                        <Tab text="Simulação">
-                          <content>
-                            <AnchorPane minHeight="150.0" minWidth="900.0" prefHeight="180.0" prefWidth="1380.0">
+            <JFXTabPane prefHeight="600.0" prefWidth="1380.0" BorderPane.alignment="CENTER">
+               <tabs>
+                  <Tab text="Simulação">
+                    <content>
+                      <AnchorPane minWidth="-Infinity" prefHeight="600.0" prefWidth="1380.0">
+                           <children>
+                              <VBox prefHeight="600.0" prefWidth="1380.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <VBox prefHeight="410.0" prefWidth="1380.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-                                       <children>
-                                          <JFXTabPane prefHeight="410.0" prefWidth="1380.0">
-                                             <tabs>
-                                                <Tab text="Resumo">
-                                                  <content>
-                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="380.0" prefWidth="200.0">
+                                    <JFXTabPane prefHeight="600.0" prefWidth="1380.0">
+                                       <tabs>
+                                          <Tab text="Resumo">
+                                            <content>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="200.0">
+                                                   <children>
+                                                      <VBox prefHeight="107.0" prefWidth="1380.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                          <children>
-                                                            <VBox prefHeight="107.0" prefWidth="1380.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                            <TableView fx:id="tabelaResumo" prefHeight="410.0" prefWidth="200.0" styleClass="table-view-resumo" stylesheets="@stylesheet.css" VBox.vgrow="ALWAYS">
+                                                              <columns>
+                                                                <TableColumn fx:id="colResCampos" editable="false" prefWidth="354.0" resizable="false" sortable="false" text="Campos" />
+                                                                <TableColumn editable="false" minWidth="155.0" prefWidth="225.0" resizable="false" sortable="false" text="Valores">
+                                                                     <columns>
+                                                                        <TableColumn fx:id="colResSac" editable="false" prefWidth="200.0" resizable="false" sortable="false" styleClass="coluna" text="SAC" />
+                                                                        <TableColumn fx:id="colResPrice" editable="false" prefWidth="200.0" resizable="false" sortable="false" styleClass="coluna" text="PRICE" />
+                                                                     </columns>
+                                                                  </TableColumn>
+                                                                  <TableColumn fx:id="colResDiferenca" prefWidth="200.0" resizable="false" styleClass="coluna" text="Diferença" />
+                                                                  <TableColumn fx:id="colResPerc" prefWidth="200.0" resizable="false" styleClass="coluna" text="\%" />
+                                                              </columns>
+                                                            </TableView>
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </AnchorPane>
+                                            </content>
+                                          </Tab>
+                                          <Tab text="Detalhe">
+                                            <content>
+                                              <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="380.0" prefWidth="200.0">
+                                                   <children>
+                                                      <SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="1400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                        <items>
+                                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                                                <children>
-                                                                  <TableView fx:id="tabelaResumo" prefHeight="410.0" prefWidth="200.0" styleClass="table-view-resumo" stylesheets="@stylesheet.css">
-                                                                    <columns>
-                                                                      <TableColumn fx:id="colResCampos" editable="false" prefWidth="354.0" resizable="false" sortable="false" text="Campos" />
-                                                                      <TableColumn editable="false" minWidth="155.0" prefWidth="225.0" resizable="false" sortable="false" text="Valores">
-                                                                           <columns>
-                                                                              <TableColumn fx:id="colResSac" editable="false" prefWidth="200.0" resizable="false" sortable="false" styleClass="coluna" text="SAC" />
-                                                                              <TableColumn fx:id="colResPrice" editable="false" prefWidth="200.0" resizable="false" sortable="false" styleClass="coluna" text="PRICE" />
-                                                                           </columns>
-                                                                        </TableColumn>
-                                                                        <TableColumn fx:id="colResDiferenca" prefWidth="200.0" resizable="false" styleClass="coluna" text="Diferença" />
-                                                                        <TableColumn fx:id="colResPerc" prefWidth="200.0" resizable="false" styleClass="coluna" text="\%" />
-                                                                    </columns>
-                                                                  </TableView>
-                                                               </children></VBox>
-                                                         </children></AnchorPane>
-                                                  </content>
-                                                </Tab>
-                                                <Tab text="Detalhe">
-                                                  <content>
-                                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="200.0">
-                                                         <children>
-                                                            <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="10.0">
-                                                               <center>
-                                                                  <VBox prefWidth="1380.0" BorderPane.alignment="CENTER">
-                                                                     <children>
-                                                                        <TitledPane animated="false" collapsible="false" styleClass="titled-pane-detalhe" stylesheets="@stylesheet.css" text="SAC">
-                                                                          <content>
-                                                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="200.0">
-                                                                                 <children>
-                                                                                    <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                                                       <center>
-                                                                                          <TableView fx:id="tabelaDetSAC" prefHeight="100.0" styleClass="table-view-resumo" stylesheets="@stylesheet.css" BorderPane.alignment="CENTER">
-                                                                                            <columns>
-                                                                                              <TableColumn fx:id="colSacParcela" prefWidth="75.0" text="Parcela" />
-                                                                                              <TableColumn fx:id="colSacData" prefWidth="130.0" text="Data" />
-                                                                                                <TableColumn fx:id="colSacValPrestacao" prefWidth="200.0" text="Valor Prestação" />
-                                                                                                <TableColumn fx:id="colSacValPrincipal" prefWidth="200.0" text="Valor Principal" />
-                                                                                                <TableColumn fx:id="colSacJuros" prefWidth="200.0" text="Juros" />
-                                                                                                <TableColumn fx:id="colSacMIP" prefWidth="130.0" text="MIP" />
-                                                                                                <TableColumn fx:id="colSacDFI" prefWidth="130.0" text="DFI" />
-                                                                                                <TableColumn fx:id="colSacTarifa" prefWidth="130.0" text="Tarifa" />
-                                                                                                <TableColumn fx:id="colSacSaldoDevedor" prefWidth="200.0" text="Saldo Devedor" />
-                                                                                            </columns>
-                                                                                             <BorderPane.margin>
-                                                                                                <Insets />
-                                                                                             </BorderPane.margin>
-                                                                                          </TableView>
-                                                                                       </center>
-                                                                                    </BorderPane>
-                                                                                 </children>
-                                                                              </AnchorPane>
-                                                                          </content>
-                                                                           <padding>
-                                                                              <Insets bottom="5.0" />
-                                                                           </padding>
-                                                                        </TitledPane>
-                                                                        <TitledPane animated="false" collapsible="false" layoutX="10.0" layoutY="15.0" styleClass="titled-pane-detalhe" stylesheets="@stylesheet.css" text="PRICE">
-                                                                           <content>
-                                                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="200.0">
-                                                                                 <children>
-                                                                                    <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                                                       <center>
-                                                                                          <TableView fx:id="tabelaDetPRICE" prefHeight="100.0" styleClass="table-view-resumo" stylesheets="@stylesheet.css" BorderPane.alignment="CENTER">
-                                                                                             <columns>
-                                                                                                <TableColumn fx:id="colPriceParcela" prefWidth="75.0" text="Parcela" />
-                                                                                                <TableColumn fx:id="colPriceData" prefWidth="130.0" text="Data" />
-                                                                                                <TableColumn fx:id="colPriceValPrestacao" prefWidth="200.0" text="Valor Prestação" />
-                                                                                                <TableColumn fx:id="colPriceValPrincipal" prefWidth="200.0" text="Valor Principal" />
-                                                                                                <TableColumn fx:id="colPriceJuros" prefWidth="200.0" text="Juros" />
-                                                                                                <TableColumn fx:id="colPriceMIP" prefWidth="130.0" text="MIP" />
-                                                                                                <TableColumn fx:id="colPriceDFI" prefWidth="130.0" text="DFI" />
-                                                                                                <TableColumn fx:id="colPriceTarifa" prefWidth="130.0" text="Tarifa" />
-                                                                                                <TableColumn fx:id="colSacPriceDevedor" prefWidth="200.0" text="Saldo Devedor" />
-                                                                                             </columns>
-                                                                                             <BorderPane.margin>
-                                                                                                <Insets />
-                                                                                             </BorderPane.margin>
-                                                                                          </TableView>
-                                                                                       </center>
-                                                                                    </BorderPane>
-                                                                                 </children>
-                                                                              </AnchorPane>
-                                                                           </content>
-                                                                        </TitledPane>
-                                                                     </children>
+                                                                  <TitledPane animated="false" collapsible="false" prefHeight="373.0" prefWidth="640.0" styleClass="titled-pane-detalhe" stylesheets="@stylesheet.css" text="SAC" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                    <content>
+                                                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="200.0">
+                                                                           <children>
+                                                                              <BorderPane prefHeight="124.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                                 <center>
+                                                                                    <TableView fx:id="tabelaDetSAC" prefHeight="100.0" prefWidth="293.0" styleClass="table-view-resumo" stylesheets="@stylesheet.css" BorderPane.alignment="CENTER">
+                                                                                      <columns>
+                                                                                        <TableColumn fx:id="colSacParcela" prefWidth="60.0" text="Parcela" />
+                                                                                        <TableColumn fx:id="colSacData" prefWidth="100.0" text="Data" />
+                                                                                          <TableColumn fx:id="colSacValPrestacao" prefWidth="100.0" text="Prestação" />
+                                                                                          <TableColumn fx:id="colSacValPrincipal" prefWidth="100.0" text="Principal" />
+                                                                                          <TableColumn fx:id="colSacJuros" text="Juros" />
+                                                                                          <TableColumn fx:id="colSacMIP" text="MIP" visible="false" />
+                                                                                          <TableColumn fx:id="colSacDFI" text="DFI" visible="false" />
+                                                                                          <TableColumn fx:id="colSacTarifa" text="Tarifa" visible="false" />
+                                                                                          <TableColumn fx:id="colSacSaldoDevedor" prefWidth="100.0" text="Saldo" />
+                                                                                      </columns>
+                                                                                       <BorderPane.margin>
+                                                                                          <Insets />
+                                                                                       </BorderPane.margin>
+                                                                                    </TableView>
+                                                                                 </center>
+                                                                              </BorderPane>
+                                                                           </children>
+                                                                        </AnchorPane>
+                                                                    </content>
                                                                      <padding>
-                                                                        <Insets bottom="5.0" top="5.0" />
+                                                                        <Insets bottom="5.0" />
                                                                      </padding>
-                                                                  </VBox>
-                                                               </center>
-                                                            </BorderPane>
-                                                         </children></AnchorPane>
-                                                  </content>
-                                                </Tab>
-                                             </tabs>
-                                          </JFXTabPane>
-                                       </children>
-                                    </VBox>
+                                                                  </TitledPane>
+                                                               </children>
+                                                            </AnchorPane>
+                                                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                               <children>
+                                                                  <TitledPane animated="false" collapsible="false" prefHeight="373.0" prefWidth="750.0" styleClass="titled-pane-detalhe" stylesheets="@stylesheet.css" text="PRICE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                     <content>
+                                                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefWidth="200.0">
+                                                                           <children>
+                                                                              <BorderPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                                 <center>
+                                                                                    <TableView fx:id="tabelaDetPRICE" prefHeight="100.0" styleClass="table-view-resumo" stylesheets="@stylesheet.css" BorderPane.alignment="CENTER">
+                                                                                       <columns>
+                                                                                          <TableColumn fx:id="colPriceParcela" prefWidth="60.0" text="Parcela" />
+                                                                                          <TableColumn fx:id="colPriceData" prefWidth="100.0" text="Data" />
+                                                                                          <TableColumn fx:id="colPriceValPrestacao" prefWidth="100.0" text="Prestação" />
+                                                                                          <TableColumn fx:id="colPriceValPrincipal" prefWidth="100.0" text="Principal" />
+                                                                                          <TableColumn fx:id="colPriceJuros" text="Juros" />
+                                                                                          <TableColumn fx:id="colPriceMIP" text="MIP" visible="false" />
+                                                                                          <TableColumn fx:id="colPriceDFI" text="DFI" visible="false" />
+                                                                                          <TableColumn fx:id="colPriceTarifa" text="Tarifa" visible="false" />
+                                                                                          <TableColumn fx:id="colSacPriceDevedor" prefWidth="100.0" text="Saldo" />
+                                                                                       </columns>
+                                                                                       <BorderPane.margin>
+                                                                                          <Insets />
+                                                                                       </BorderPane.margin>
+                                                                                    </TableView>
+                                                                                 </center>
+                                                                              </BorderPane>
+                                                                           </children>
+                                                                        </AnchorPane>
+                                                                     </content>
+                                                                  </TitledPane>
+                                                               </children>
+                                                            </AnchorPane>
+                                                        </items>
+                                                      </SplitPane>
+                                                   </children>
+                                                </AnchorPane>
+                                            </content>
+                                          </Tab>
+                                       </tabs>
+                                    </JFXTabPane>
                                  </children>
-                              </AnchorPane>
-                          </content>
-                        </Tab>
-                        <Tab text="Comparativo">
-                          <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </Tab>
+                  <Tab text="Comparativo">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <GridPane gridLinesVisible="true" prefHeight="430.0" prefWidth="1410.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
                                  <children>
-                                    <VBox prefHeight="200.0" prefWidth="1380.0" />
+                                    <LineChart fx:id="grafico1" animated="false" createSymbols="false">
+                                      <xAxis>
+                                        <CategoryAxis fx:id="catAxisParcelas" animated="false" gapStartAndEnd="false" label="Parcelas" side="BOTTOM" startMargin="0.0" tickLabelGap="8.0" tickMarkVisible="false" />
+                                      </xAxis>
+                                      <yAxis>
+                                        <NumberAxis fx:id="numberAxisPrestacao" animated="false" autoRanging="false" label="Prestação" minorTickLength="1000.0" minorTickVisible="false" side="LEFT" tickMarkVisible="false" tickUnit="1000.0" upperBound="10000.0" />
+                                      </yAxis>
+                                    </LineChart>
+                                    <BarChart fx:id="grafico2" animated="false" GridPane.columnIndex="1">
+                                      <xAxis>
+                                        <CategoryAxis fx:id="grafico2x" animated="false" side="BOTTOM" />
+                                      </xAxis>
+                                      <yAxis>
+                                        <NumberAxis fx:id="grafico2y" animated="false" side="LEFT" />
+                                      </yAxis>
+                                    </BarChart>
                                  </children>
-                              </AnchorPane>
-                          </content>
-                        </Tab>
-                     </tabs>
-                  </JFXTabPane>
-               </center>
-               <BorderPane.margin>
-                  <Insets left="5.0" right="5.0" />
-               </BorderPane.margin>
-            </BorderPane>
+                              </GridPane>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </Tab>
+               </tabs>
+            </JFXTabPane>
          </center>
       </BorderPane>
    </children>
