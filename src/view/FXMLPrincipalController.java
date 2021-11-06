@@ -9,29 +9,18 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXSlider;
 import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.validation.NumberValidator;
-import java.io.File;
-import java.math.BigDecimal;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 import java.util.ResourceBundle;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
@@ -40,14 +29,12 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
-import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.web.WebEngine;
-import javafx.scene.web.WebView;
 import util.Resumo;
 import util.Simulacao;
 import util.Util;
@@ -229,7 +216,8 @@ public class FXMLPrincipalController implements Initializable {
     private CategoryAxis grafico2x;
     
 
-    
+    @FXML
+    private TextArea dicaText;
         
     public void carrega()
     {
@@ -240,7 +228,7 @@ public class FXMLPrincipalController implements Initializable {
         frequencia = (String)(cbFreq.getSelectionModel().getSelectedItem());        
         tipo = (String)(cbTipo.getSelectionModel().getSelectedItem());
         aporte = Double.parseDouble(tfAmort.getText());
-        System.out.println("Carrega: "+valBem);
+        dicaText.setText("Seu tempo é "+aporte);
     }
     
     @Override
@@ -326,6 +314,18 @@ public class FXMLPrincipalController implements Initializable {
         slValorBem.valueProperty().addListener((observable, oldValue, newValue) ->
         {
             tfValorBem.setText(String.valueOf(Math.abs(newValue.intValue())));
+            carrega();
+            calcular(qtdTempo,valBem,valEntrada,valTaxa,frequencia,aporte,tipo);
+        });
+        
+        cbFreq.valueProperty().addListener((observable, oldValue, newValue) ->
+        {
+            carrega();
+            calcular(qtdTempo,valBem,valEntrada,valTaxa,frequencia,aporte,tipo);
+        });
+        
+        cbTipo.valueProperty().addListener((observable, oldValue, newValue) ->
+        {
             carrega();
             calcular(qtdTempo,valBem,valEntrada,valTaxa,frequencia,aporte,tipo);
         });
@@ -457,7 +457,8 @@ public class FXMLPrincipalController implements Initializable {
                 new PropertyValueFactory<>("principal"));
         
         
-        
+        carrega();
+        calcular(qtdTempo,valBem,valEntrada,valTaxa,frequencia,aporte,tipo);
         
     }
 
@@ -495,13 +496,15 @@ public class FXMLPrincipalController implements Initializable {
             valTaxaPrice=valTaxa;
         }
             
-        double valSaldoSac = valBem-valEntrada;
+        
         
         //SAC
+        double valSaldoSac = valBem-valEntrada;
         int parcelaSac = 0;
         Date dtInicialSac = new Date();
         Date dtDataSac = new Date();
         double valorPrincipalOriginalSac = valSaldoSac/qtdTempo;
+        double valorOriginalSac = valorPrincipalOriginalSac + (valSaldoSac*valTaxaSac/100);
         ArrayList<Simulacao> simSac = new ArrayList<Simulacao>();
         double prestacaoSac = 0;
         double jurosSac = 0;
@@ -509,68 +512,16 @@ public class FXMLPrincipalController implements Initializable {
         double somaAportesSac = 0;
         double somaPrestacoesSac = 0;
         
-        for(int i = 0;i<qtdTempo;i++)
-        {
-            if (valSaldoSac>0)
-            jurosSac = valSaldoSac*valTaxaSac/100;
-            else
-                jurosSac=0;
-            prestacaoSac = valorPrincipalOriginalSac + jurosSac;
-            parcelaSac=i;
-            LocalDate localData = dtDataSac.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            localData = localData.plusMonths(1);
-            
-            DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-            String data = (df.format(Date.from(localData.atStartOfDay(ZoneId.systemDefault()).toInstant())));
-            simSac.add(new Simulacao(String.valueOf(parcelaSac),data,String.format("%.2f",prestacaoSac),String.format("%.2f",valorPrincipalOriginalSac),
-                    String.format("%.2f",jurosSac),String.format("%.2f",valSaldoSac)));
-             
-            //chart.addItemSAC(parcela, prestacao);
-            if (valSaldoSac>=(valorPrincipalOriginalSac+aporteSac))
-            {
-                if (tipo=="Saldo Devedor")
-                {
-                    valSaldoSac=valSaldoSac-valorPrincipalOriginalSac-aporteSac;
-                }
-                else
-                {
-                    valSaldoSac=valSaldoSac-valorPrincipalOriginalSac-aporteSac;
-                    valorPrincipalOriginalSac = valSaldoSac/(qtdTempo-parcelaSac+1);
-                }
-                ultParcelaSac = i;
-                somaAportesSac = somaAportesSac+aporteSac;
-                somaPrestacoesSac = somaPrestacoesSac+prestacaoSac;
-            }
-            else 
-            {   
-                aporteSac=valSaldoSac-valorPrincipalOriginalSac;
-                somaAportesSac = somaAportesSac+aporteSac;
-                valSaldoSac=valSaldoSac-valorPrincipalOriginalSac-aporteSac;
-                somaPrestacoesSac = somaPrestacoesSac+prestacaoSac;
-                /*chartBarra.addItem(somaPrestacoes, "SAC", "Prestações");
-                chartBarra.addItem(somaAportes, "SAC", "Aportes");
-                chartBarra.addItem(somaPrestacoes+somaAportes+entrada, "SAC", "Total Pago");*/
-                ultParcelaSac = i;
-                break;                
-            }
-            
-            
-            dtDataSac=Date.from(localData.atStartOfDay(ZoneId.systemDefault()).toInstant());
-        }
-        double qtd = qtdTempo;
-        double ultSac = ultParcelaSac;
-        
         //PRICE
-        
-        double saldoPRICE = valBem-valEntrada;
+        double valSaldoPRICE = valBem-valEntrada;
         int parcelaPRICE = 0;
         Date dtDataPRICE = new Date();
         System.out.println(valTaxaPrice);
-        double parc1 = (Math.pow((1+(valTaxaPrice/100)), qtd)*(valTaxaPrice/100));
+        double parc1 = (Math.pow((1+(valTaxaPrice/100)), qtdTempo)*(valTaxaPrice/100));
         System.out.println("parc1 "+parc1);
-        double parc2 = (Math.pow((1+(valTaxaPrice/100)), qtd)-1);
+        double parc2 = (Math.pow((1+(valTaxaPrice/100)), qtdTempo)-1);
         System.out.println("parc2 "+parc2);
-        double valorPrincipalOriginalPRICE = (saldoPRICE*(Math.pow((1+(valTaxaPrice/100)), qtd)*(valTaxaPrice/100))/(Math.pow((1+(valTaxaPrice/100)), qtd)-1));
+        double valorPrincipalOriginalPRICE = (valSaldoPRICE*(Math.pow((1+(valTaxaPrice/100)), qtdTempo)*(valTaxaPrice/100))/(Math.pow((1+(valTaxaPrice/100)), qtdTempo)-1));
         System.out.println("valor "+valorPrincipalOriginalPRICE);
         ArrayList<Simulacao> simPRICE = new ArrayList<Simulacao>();        
         double prestacaoPRICE = 0;
@@ -579,60 +530,121 @@ public class FXMLPrincipalController implements Initializable {
         double somaAportesPRICE = 0;
         double somaPrestacoesPRICE = 0;
         double amortizacao = 0;
-        for(int i = 0;i<qtd;i++)
+        
+        boolean bolSac = false;
+        boolean bolPrice = false;
+        int parcelaComum = 0;
+        String dataComum = "";
+        
+        for(int i = 0;i<qtdTempo;i++)
         {
-            if (saldoPRICE>0)
-            jurosPRICE = saldoPRICE*valTaxaPrice/100;
-            else
-                jurosPRICE=0;
-            amortizacao = valorPrincipalOriginalPRICE-jurosPRICE;
-            prestacaoPRICE = valorPrincipalOriginalPRICE;
-            parcelaPRICE=i;
-            LocalDate localData = dtDataPRICE.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            localData = localData.plusMonths(1);
-            
+            LocalDate localData = dtDataSac.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            localData = localData.plusMonths(1);            
             DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
             String data = (df.format(Date.from(localData.atStartOfDay(ZoneId.systemDefault()).toInstant())));
-            simPRICE.add(new Simulacao(String.valueOf(parcelaPRICE),data,String.format("%.2f",prestacaoPRICE),String.format("%.2f",amortizacao),
-                    String.format("%.2f",jurosPRICE),String.format("%.2f",saldoPRICE)));
-            //chart.addItemPRICE(parcelaPRICE, prestacaoPRICE);
-            if (saldoPRICE>=(amortizacao+aportePrice))
+            if (!bolSac)
             {
-                //chart.addItemDataset(prestacaoPRICE, "PRICE", data);
-                if (tipo=="Saldo Devedor")
-                {
-                    saldoPRICE=saldoPRICE-amortizacao-aportePrice;
-                }
+                    if (valSaldoSac>0)
+                        jurosSac = valSaldoSac*valTaxaSac/100;
+                    else
+                        jurosSac=0;
+
+                    prestacaoSac = valorPrincipalOriginalSac + jurosSac;
+                    parcelaSac=i;
+
+                    
+                    simSac.add(new Simulacao(String.valueOf(parcelaSac),data,String.format("%.2f",prestacaoSac),String.format("%.2f",valorPrincipalOriginalSac),
+                            String.format("%.2f",jurosSac),String.format("%.2f",valSaldoSac)));
+
+                    if (valSaldoSac>=(valorPrincipalOriginalSac+aporteSac))
+                    {
+                        if (tipo=="Saldo Devedor")
+                        {
+                            valSaldoSac=valSaldoSac-valorPrincipalOriginalSac-aporteSac;
+                        }
+                        else
+                        {
+                            valSaldoSac=valSaldoSac-valorPrincipalOriginalSac-aporteSac;
+                            valorPrincipalOriginalSac = valSaldoSac/(qtdTempo-parcelaSac+1);
+                        }
+                        ultParcelaSac = i;
+                        somaAportesSac = somaAportesSac+aporteSac;
+                        somaPrestacoesSac = somaPrestacoesSac+prestacaoSac;
+                    }
+                    else 
+                    {   
+                        aporteSac=valSaldoSac-valorPrincipalOriginalSac;
+                        somaAportesSac = somaAportesSac+aporteSac;
+                        valSaldoSac=valSaldoSac-valorPrincipalOriginalSac-aporteSac;
+                        somaPrestacoesSac = somaPrestacoesSac+prestacaoSac;
+                        ultParcelaSac = i;
+                        bolSac = true;                
+                    }      
+            }
+            
+            if (!bolPrice)
+            {
+                if (valSaldoPRICE>0)
+                    jurosPRICE = valSaldoPRICE*valTaxaPrice/100;
                 else
+                    jurosPRICE=0;
+
+                amortizacao = valorPrincipalOriginalPRICE-jurosPRICE;
+                prestacaoPRICE = valorPrincipalOriginalPRICE;
+                parcelaPRICE=i;
+
+                df = new SimpleDateFormat("dd/MM/yyyy");
+                data = (df.format(Date.from(localData.atStartOfDay(ZoneId.systemDefault()).toInstant())));
+                simPRICE.add(new Simulacao(String.valueOf(parcelaPRICE),data,String.format("%.2f",prestacaoPRICE),String.format("%.2f",amortizacao),
+                        String.format("%.2f",jurosPRICE),String.format("%.2f",valSaldoPRICE)));
+
+                if (valSaldoPRICE>=(amortizacao+aportePrice))
                 {
-                    saldoPRICE=saldoPRICE-amortizacao-aportePrice;
-                    valorPrincipalOriginalPRICE=(saldoPRICE*(Math.pow((1+(valTaxaPrice/100)), (qtd-parcelaPRICE+1))*(valTaxaPrice/100))/(Math.pow((1+(valTaxaPrice/100)), (qtd-parcelaPRICE+1))-1));
+                    if (tipo=="Saldo Devedor")
+                    {
+                        valSaldoPRICE=valSaldoPRICE-amortizacao-aportePrice;
+                    }
+                    else
+                    {
+                        valSaldoPRICE=valSaldoPRICE-amortizacao-aportePrice;
+                        valorPrincipalOriginalPRICE=(valSaldoPRICE*(Math.pow((1+(valTaxaPrice/100)), (qtdTempo-parcelaPRICE+1))*(valTaxaPrice/100))/(Math.pow((1+(valTaxaPrice/100)), (qtdTempo-parcelaPRICE+1))-1));
+                    }
+                    ultParcelaPRICE = i;    
+                    somaAportesPRICE = somaAportesPRICE+aportePrice;
+                    somaPrestacoesPRICE = somaPrestacoesPRICE+prestacaoPRICE;
                 }
-                ultParcelaPRICE = i;    
-                somaAportesPRICE = somaAportesPRICE+aportePrice;
-                //System.out.println("somaAportesPRICE: "+somaAportesPRICE);
-                somaPrestacoesPRICE = somaPrestacoesPRICE+prestacaoPRICE;
+                else 
+                {   
+                    aporte=valSaldoPRICE-amortizacao;
+                    somaAportesPRICE = somaAportesPRICE+aportePrice;
+                    valSaldoPRICE=valSaldoPRICE-amortizacao-aportePrice;
+                    somaPrestacoesPRICE = somaPrestacoesPRICE+prestacaoPRICE;
+                    ultParcelaPRICE = i;
+                    bolPrice=true;                
+                }
             }
-            else 
-            {   
-                aporte=saldoPRICE-amortizacao;
-                somaAportesPRICE = somaAportesPRICE+aportePrice;
-                //System.out.println("somaAportesPRICEx: "+somaAportesPRICE);
-                saldoPRICE=saldoPRICE-amortizacao-aportePrice;
-                somaPrestacoesPRICE = somaPrestacoesPRICE+prestacaoPRICE;
-                ultParcelaPRICE = i;
-                /*chartBarra.addItem(somaPrestacoesPRICE, "PRICE", "Prestações");
-                chartBarra.addItem(somaAportesPRICE, "PRICE", "Aportes");
-                chartBarra.addItem(somaPrestacoesPRICE+somaAportesPRICE+entrada, "PRICE", "Total Pago");*/
-                break;                
+            
+            if ((prestacaoPRICE>prestacaoSac)&&(parcelaComum==0))
+            {
+                parcelaComum=i;
+                
             }
-            dtDataPRICE=Date.from(localData.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            
+            if (i==parcelaComum*2)
+            {
+                dataComum = data;
+            }
+            
+            dtDataSac=Date.from(localData.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            
         }
+        double qtd = qtdTempo;
+        double ultSac = ultParcelaSac;
         double ultPrice = ultParcelaPRICE;
         
         tabelaResumo.getItems().clear();
         tabelaResumo.getItems().add(new Resumo("Meses Previstos", String.format("%.0f",qtd), String.format("%.0f",qtd),"",""));
-        tabelaResumo.getItems().add(new Resumo("Meses Pagando", String.format("%.0f",ultSac), String.format("%.0f",ultPrice),"",""));
+        tabelaResumo.getItems().add(new Resumo("Meses Pagando", String.format("%.0f",ultSac+1), String.format("%.0f",ultPrice+1),"",""));
         tabelaResumo.getItems().add(new Resumo("Meses Amortizados", String.format("%.0f",(qtd-ultSac)),String.format("%.0f",(qtd-ultPrice)),"",""));
         tabelaResumo.getItems().add(new Resumo("Anos Previstos", String.format("%.0f",(qtd/12)),String.format("%.0f",(qtd/12)),"",""));
         tabelaResumo.getItems().add(new Resumo("Anos Pagando", String.format("%.0f",(ultSac/12)),String.format("%.0f",(ultPrice/12)),"",""));
@@ -667,7 +679,7 @@ public class FXMLPrincipalController implements Initializable {
         grafico1.getData().clear();
         grafico1.getData().addAll(sac,price);
         
-        numberAxisPrestacao.setUpperBound(valorPrincipalOriginalPRICE+1000);
+        numberAxisPrestacao.setUpperBound(valorOriginalSac+1000);
         
         XYChart.Series sacBarra = new XYChart.Series<>();
         sacBarra.setName("SAC");
@@ -684,7 +696,29 @@ public class FXMLPrincipalController implements Initializable {
         grafico2.getData().addAll(sacBarra,priceBarra);
         
         grafico2y.setUpperBound(somaPrestacoesPRICE+somaAportesPRICE+valEntrada+1000);
+        
+        String texto = "";
+        if (parcelaComum>0)
+        {
+            texto = " - A quitação antes da parcela "+(parcelaComum*2)+" em "+dataComum+" faz com que o financiamento pela modalidade PRICE seja mais vantajoso, caso contrário o SAC é mais econômico.";
+        }
+        double totalSac = somaPrestacoesSac+somaAportesSac+valEntrada;
+        double totalPrice = somaPrestacoesPRICE+somaAportesPRICE+valEntrada;
+        
+        if (totalSac>totalPrice)
+        {
+            texto = texto + "/n"+" - Na modalidade PRICE você pagará "+(String.format("%.2f",totalSac-totalPrice))+" reais a menos. Uma diferença de "+(String.format("%.2f",(totalSac-totalPrice)*100/totalSac))+"% .";
+        }
+        
+        if (totalPrice>totalSac)
+        {
+            texto = texto + "\n"+" - Na modalidade SAC você pagará "+(String.format("%.2f",totalPrice-totalSac))+" reais a menos. Uma diferença de "+(String.format("%.2f",(totalPrice-totalSac)*100/totalPrice))+"% .";
+        }
+        
+        dicaText.setText(texto);
     }
+    
+    
     
     public void formataTextField(String newValue, String oldValue, JFXSlider slider, JFXTextField textfield, JFXSlider sliderEntrada, JFXSlider sliderAmort)
     {

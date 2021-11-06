@@ -9,11 +9,12 @@ and open the template in the editor.
 */
 
 .parent{
-    -fx-background-color: #F2F3F9;   
+    -fx-background-color: #DADADA;   
 }
 .pane{
     -fx-background-color: #FFFFFF;
-    -fx-background-radius: 5%;
+    -fx-background-radius: 18 18 18 18;
+    -fx-border-radius: 18 18 18 18;
 }
 .label-cabecalho{
     -fx-font-size: 14pt;
@@ -70,4 +71,18 @@ and open the template in the editor.
 
 .coluna {
   -fx-alignment: CENTER_RIGHT;
+}
+.jfx-tab-pane{
+    -fx-background-radius: 18 18 18 18;
+    -fx-border-radius: 18 18 18 18;    
+}
+
+
+.jfx-tab-pane .headers-region {
+    -fx-background-color: #3D961A;
+    /*-fx-background-color: #1b75bc;*/
+}
+.jfx-tab-pane .tab-header-background {
+    -fx-background-color: #3D961A;
+    /*-fx-background-color: #1b75bc;*/
 }

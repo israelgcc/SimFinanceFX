@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch4jConfig>
+  <dontWrapJar>false</dontWrapJar>
+  <headerType>gui</headerType>
+  <jar>C:\Users\israe\Documents\GitHub\SimFinanceFX\dist\SimFinanceFX.jar</jar>
+  <outfile>C:\Users\israe\Documents\GitHub\SimFinanceFX\dist\SimFinanceFX.exe</outfile>
+  <errTitle>Necessário instalar JRE do Java</errTitle>
+  <cmdLine></cmdLine>
+  <chdir>.</chdir>
+  <priority>normal</priority>
+  <downloadUrl>http://java.com/download</downloadUrl>
+  <supportUrl></supportUrl>
+  <stayAlive>false</stayAlive>
+  <restartOnCrash>false</restartOnCrash>
+  <manifest></manifest>
+  <icon>C:\Users\israe\Documents\GitHub\SimFinanceFX\dist\lib\1486564172-finance-loan-money_81492.ico</icon>
+  <singleInstance>
+    <mutexName>SimFinanceFX</mutexName>
+    <windowTitle>SimFinanceFX</windowTitle>
+  </singleInstance>
+  <jre>
+    <path></path>
+    <bundledJre64Bit>false</bundledJre64Bit>
+    <bundledJreAsFallback>false</bundledJreAsFallback>
+    <minVersion>1.8.0</minVersion>
+    <maxVersion></maxVersion>
+    <jdkPreference>preferJre</jdkPreference>
+    <runtimeBits>64/32</runtimeBits>
+  </jre>
+  <versionInfo>
+    <fileVersion>1.0.0.0</fileVersion>
+    <txtFileVersion> </txtFileVersion>
+    <fileDescription>Executável do sistema SimFinanceFX</fileDescription>
+    <copyright>Distridigitalis</copyright>
+    <productVersion>1.0.0.0</productVersion>
+    <txtProductVersion> </txtProductVersion>
+    <productName>SimFinanceFX</productName>
+    <companyName>Distridigitalis</companyName>
+    <internalName>Distridigitalis</internalName>
+    <originalFilename>SimFinanceFX.exe</originalFilename>
+    <trademarks></trademarks>
+    <language>PORTUGUESE_BRAZIL</language>
+  </versionInfo>
+</launch4jConfig>

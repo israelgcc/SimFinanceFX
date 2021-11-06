@@ -7,13 +7,10 @@ package view;
 
 import javafx.application.Application;
 import static javafx.application.Application.launch;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -27,10 +24,11 @@ public class Principal extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("FXMLPrincipal.fxml"));
         
         Scene scene = new Scene(root);
-        //stage.setMaximized(false);
         stage.setMinWidth(root.minWidth(-1));
         stage.setMinHeight(root.minHeight(-1));
         stage.setResizable(true);
+        stage.getIcons().add(new Image("file:lib/1486564172-finance-loan-money_81492.png"));
+        stage.setTitle("SimFinanceFX");
         stage.setScene(scene);
         stage.show();
     }

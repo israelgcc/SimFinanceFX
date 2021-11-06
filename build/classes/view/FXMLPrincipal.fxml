@@ -30,452 +30,476 @@
 
 <AnchorPane id="AnchorPane" minHeight="820.0" minWidth="1420.0" prefHeight="800.0" prefWidth="1420.0" styleClass="parent" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.FXMLPrincipalController">
    <children>
-      <BorderPane prefHeight="800.0" prefWidth="1420.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <BorderPane prefHeight="800.0" prefWidth="1420.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="0.0">
          <top>
-            <VBox minHeight="-Infinity" minWidth="-Infinity" BorderPane.alignment="TOP_LEFT">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
+            <HBox prefWidth="1200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox minHeight="-Infinity" minWidth="-Infinity" prefWidth="1180.0" BorderPane.alignment="TOP_LEFT">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <BorderPane.margin>
+                        <Insets />
+                     </BorderPane.margin>
+                     <children>
+                        <HBox prefHeight="170.0" prefWidth="900.0">
+                           <children>
+                              <VBox prefHeight="200.0" prefWidth="380.0">
+                                 <children>
+                                    <Pane prefHeight="160.0" prefWidth="380.0" style="-fx-border-radius: 10%;" styleClass="pane" stylesheets="@stylesheet.css">
+                                       <children>
+                                          <VBox layoutY="-7.0" prefHeight="170.0">
+                                             <children>
+                                                <HBox prefHeight="40.0" prefWidth="380.0">
+                                                   <children>
+                                                      <Label styleClass="label-cabecalho" stylesheets="@stylesheet.css" text="Tempo">
+                                                         <HBox.margin>
+                                                            <Insets left="5.0" top="10.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                      <JFXRadioButton fx:id="rbTempoMes" selected="true" text="Meses">
+                                                         <HBox.margin>
+                                                            <Insets left="10.0" top="13.0" />
+                                                         </HBox.margin>
+                                                      </JFXRadioButton>
+                                                      <JFXRadioButton fx:id="rbTempoAno" text="Anos">
+                                                         <HBox.margin>
+                                                            <Insets left="10.0" top="13.0" />
+                                                         </HBox.margin>
+                                                      </JFXRadioButton>
+                                                   </children>
+                                                   <padding>
+                                                      <Insets left="5.0" right="5.0" />
+                                                   </padding>
+                                                </HBox>
+                                                <VBox prefHeight="118.0" prefWidth="380.0">
+                                                   <children>
+                                                      <HBox prefHeight="40.0" prefWidth="200.0">
+                                                         <children>
+                                                            <Label fx:id="lblTempo" prefWidth="280.0" styleClass="label-real" stylesheets="@stylesheet.css" text="360">
+                                                               <padding>
+                                                                  <Insets bottom="10.0" left="20.0" top="10.0" />
+                                                               </padding>
+                                                               <HBox.margin>
+                                                                  <Insets />
+                                                               </HBox.margin>
+                                                            </Label>
+                                                            <ImageView fitHeight="50.0" fitWidth="50.0" opacity="0.75" pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="@images/ampulheta.png" />
+                                                               </image>
+                                                            </ImageView>
+                                                         </children>
+                                                      </HBox>
+                                                      <JFXSlider fx:id="slTempo" blockIncrement="1.0" majorTickUnit="50.0" max="420.0" min="1.0" minorTickCount="50" showTickLabels="true" showTickMarks="true" value="360.0">
+                                                         <VBox.margin>
+                                                            <Insets left="10.0" right="10.0" top="20.0" />
+                                                         </VBox.margin>
+                                                      </JFXSlider>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </Pane>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                              </VBox>
+                              <VBox prefHeight="200.0" prefWidth="400.0">
+                                 <children>
+                                    <Pane prefHeight="160.0" prefWidth="380.0" styleClass="pane" stylesheets="@stylesheet.css">
+                                       <children>
+                                          <VBox layoutY="-7.0" prefHeight="170.0" prefWidth="480.0" stylesheets="@stylesheet.css">
+                                             <children>
+                                                <HBox prefHeight="40.0" prefWidth="380.0">
+                                                   <children>
+                                                      <Label styleClass="label-cabecalho" stylesheets="@stylesheet.css" text="Valor do Financiamento/Empréstimo">
+                                                         <HBox.margin>
+                                                            <Insets left="5.0" top="10.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                   </children>
+                                                   <padding>
+                                                      <Insets left="5.0" right="5.0" />
+                                                   </padding>
+                                                </HBox>
+                                                <VBox prefHeight="118.0" prefWidth="420.0">
+                                                   <children>
+                                                      <HBox prefHeight="40.0" prefWidth="200.0">
+                                                         <children>
+                                                            <JFXTextField fx:id="tfValorBem" maxWidth="120.0" minWidth="133.0" prefHeight="32.0" prefWidth="120.0" text="300000">
+                                                               <HBox.margin>
+                                                                  <Insets left="10.0" top="10.0" />
+                                                               </HBox.margin>
+                                                               <padding>
+                                                                  <Insets left="5.0" top="5.0" />
+                                                               </padding>
+                                                               <font>
+                                                                  <Font name="System Bold" size="15.0" />
+                                                               </font>
+                                                            </JFXTextField>
+                                                            <ImageView fitHeight="50.0" fitWidth="133.0" opacity="0.75" pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="@images/money.png" />
+                                                               </image>
+                                                               <HBox.margin>
+                                                                  <Insets left="170.0" />
+                                                               </HBox.margin>
+                                                            </ImageView>
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox prefHeight="100.0" prefWidth="200.0">
+                                                         <children>
+                                                            <VBox prefHeight="200.0" prefWidth="100.0">
+                                                               <children>
+                                                                  <JFXTextField fx:id="tfMinValorBem" labelFloat="true" promptText="Min" text="50000">
+                                                                     <VBox.margin>
+                                                                        <Insets top="15.0" />
+                                                                     </VBox.margin>
+                                                                  </JFXTextField>
+                                                               </children>
+                                                               <padding>
+                                                                  <Insets left="5.0" right="5.0" top="8.0" />
+                                                               </padding>
+                                                            </VBox>
+                                                            <JFXSlider fx:id="slValorBem" blockIncrement="1.0" majorTickUnit="20000.0" max="300000.0" min="50000.0" minorTickCount="20000" prefWidth="200.0" showTickLabels="true" showTickMarks="true" value="300000.0">
+                                                               <HBox.margin>
+                                                                  <Insets top="5.0" />
+                                                               </HBox.margin>
+                                                               <padding>
+                                                                  <Insets left="8.0" right="8.0" top="25.0" />
+                                                               </padding>
+                                                            </JFXSlider>
+                                                            <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
+                                                               <children>
+                                                                  <JFXTextField fx:id="tfMaxValorBem" labelFloat="true" promptText="Max" text="300000">
+                                                                     <VBox.margin>
+                                                                        <Insets top="15.0" />
+                                                                     </VBox.margin>
+                                                                  </JFXTextField>
+                                                               </children>
+                                                               <padding>
+                                                                  <Insets left="5.0" right="5.0" top="8.0" />
+                                                               </padding>
+                                                            </VBox>
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="15.0" />
+                                       </HBox.margin>
+                                    </Pane>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                              </VBox>
+                              <VBox layoutX="400.0" layoutY="10.0" prefHeight="200.0" prefWidth="350.0">
+                                 <children>
+                                    <Pane prefHeight="160.0" prefWidth="480.0" styleClass="pane" stylesheets="@stylesheet.css">
+                                       <children>
+                                          <VBox layoutY="-7.0" prefHeight="170.0" prefWidth="340.0" stylesheets="@stylesheet.css">
+                                             <children>
+                                                <HBox prefHeight="40.0" prefWidth="300.0">
+                                                   <children>
+                                                      <Label styleClass="label-cabecalho" stylesheets="@stylesheet.css" text="Valor da Entrada">
+                                                         <HBox.margin>
+                                                            <Insets left="5.0" top="10.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                   </children>
+                                                   <padding>
+                                                      <Insets left="5.0" right="5.0" />
+                                                   </padding>
+                                                </HBox>
+                                                <VBox prefHeight="118.0" prefWidth="400.0">
+                                                   <children>
+                                                      <HBox prefHeight="50.0" prefWidth="300.0">
+                                                         <children>
+                                                            <JFXTextField fx:id="tfEntrada" text="25000">
+                                                               <font>
+                                                                  <Font name="System Bold" size="15.0" />
+                                                               </font>
+                                                               <padding>
+                                                                  <Insets left="5.0" top="5.0" />
+                                                               </padding>
+                                                               <HBox.margin>
+                                                                  <Insets left="10.0" top="10.0" />
+                                                               </HBox.margin>
+                                                            </JFXTextField>
+                                                            <ImageView fitHeight="50.0" fitWidth="133.0" opacity="0.75" pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="@images/profits.png" />
+                                                               </image>
+                                                               <HBox.margin>
+                                                                  <Insets left="170.0" />
+                                                               </HBox.margin>
+                                                            </ImageView>
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox prefHeight="100.0" prefWidth="200.0">
+                                                         <children>
+                                                            <JFXSlider fx:id="slEntrada" blockIncrement="1.0" majorTickUnit="20000.0" max="150000.0" minorTickCount="9999" prefHeight="63.0" prefWidth="400.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="100000.0">
+                                                               <padding>
+                                                                  <Insets left="8.0" right="8.0" top="25.0" />
+                                                               </padding>
+                                                               <HBox.margin>
+                                                                  <Insets left="5.0" right="5.0" top="5.0" />
+                                                               </HBox.margin>
+                                                            </JFXSlider>
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="15.0" />
+                                       </HBox.margin>
+                                    </Pane>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        <HBox layoutX="20.0" layoutY="20.0" prefHeight="170.0" prefWidth="900.0">
+                           <children>
+                              <VBox prefHeight="200.0" prefWidth="380.0">
+                                 <children>
+                                    <Pane prefHeight="160.0" prefWidth="380.0" styleClass="pane" stylesheets="@stylesheet.css">
+                                       <children>
+                                          <VBox layoutY="-7.0" prefHeight="170.0">
+                                             <children>
+                                                <HBox prefHeight="40.0" prefWidth="380.0">
+                                                   <children>
+                                                      <Label styleClass="label-cabecalho" stylesheets="@stylesheet.css" text="Taxa">
+                                                         <HBox.margin>
+                                                            <Insets left="5.0" top="10.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                      <JFXRadioButton fx:id="rbTaxaMes" text="ao Mês">
+                                                         <HBox.margin>
+                                                            <Insets left="10.0" top="13.0" />
+                                                         </HBox.margin>
+                                                      </JFXRadioButton>
+                                                      <JFXRadioButton fx:id="rbTaxaAno" text="ao Ano">
+                                                         <HBox.margin>
+                                                            <Insets left="10.0" top="13.0" />
+                                                         </HBox.margin>
+                                                      </JFXRadioButton>
+                                                   </children>
+                                                   <padding>
+                                                      <Insets left="5.0" right="5.0" />
+                                                   </padding>
+                                                </HBox>
+                                                <VBox prefHeight="118.0" prefWidth="380.0">
+                                                   <children>
+                                                      <HBox prefHeight="40.0" prefWidth="200.0">
+                                                         <children>
+                                                            <JFXTextField fx:id="tfTaxa" text="0,6821">
+                                                               <font>
+                                                                  <Font name="System Bold" size="15.0" />
+                                                               </font>
+                                                               <padding>
+                                                                  <Insets left="5.0" top="5.0" />
+                                                               </padding>
+                                                               <HBox.margin>
+                                                                  <Insets left="10.0" top="10.0" />
+                                                               </HBox.margin>
+                                                            </JFXTextField>
+                                                            <ImageView fitHeight="50.0" fitWidth="50.0" opacity="0.75" pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="@images/taxa-de-juro.png" />
+                                                               </image>
+                                                               <HBox.margin>
+                                                                  <Insets left="80.0" />
+                                                               </HBox.margin>
+                                                            </ImageView>
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox prefHeight="100.0" prefWidth="200.0">
+                                                         <children>
+                                                            <JFXSlider fx:id="slTaxa" blockIncrement="1.0E-4" majorTickUnit="0.01" max="10.0" min="1.0E-4" minorTickCount="1" prefHeight="53.0" prefWidth="275.0" snapToTicks="true" value="0.7974">
+                                                               <padding>
+                                                                  <Insets left="8.0" right="8.0" top="25.0" />
+                                                               </padding>
+                                                               <HBox.margin>
+                                                                  <Insets top="5.0" />
+                                                               </HBox.margin>
+                                                            </JFXSlider>
+                                                            <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
+                                                               <padding>
+                                                                  <Insets left="5.0" right="5.0" top="8.0" />
+                                                               </padding>
+                                                               <children>
+                                                                  <JFXTextField fx:id="tfMaxTaxa" labelFloat="true" promptText="Max" text="10">
+                                                                     <VBox.margin>
+                                                                        <Insets top="15.0" />
+                                                                     </VBox.margin>
+                                                                  </JFXTextField>
+                                                               </children>
+                                                            </VBox>
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </Pane>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                              </VBox>
+                              <VBox prefHeight="200.0" prefWidth="760.0">
+                                 <children>
+                                    <Pane prefHeight="160.0" prefWidth="600.0" styleClass="pane" stylesheets="@stylesheet.css">
+                                       <children>
+                                          <VBox layoutY="-7.0" prefHeight="170.0" prefWidth="749.0" stylesheets="@stylesheet.css">
+                                             <children>
+                                                <HBox prefHeight="40.0" prefWidth="380.0">
+                                                   <children>
+                                                      <Label styleClass="label-cabecalho" stylesheets="@stylesheet.css" text="Aporte adicional para Amortização">
+                                                         <HBox.margin>
+                                                            <Insets left="5.0" top="10.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                      <Label text="Frequência" textFill="#aea4a4">
+                                                         <HBox.margin>
+                                                            <Insets left="125.0" top="20.0" />
+                                                         </HBox.margin>
+                                                         <font>
+                                                            <Font size="12.0" />
+                                                         </font>
+                                                      </Label>
+                                                      <Label layoutX="247.0" layoutY="30.0" text="Tipo" textFill="#aea4a4">
+                                                         <HBox.margin>
+                                                            <Insets left="140.0" top="20.0" />
+                                                         </HBox.margin>
+                                                         <font>
+                                                            <Font size="12.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                   <padding>
+                                                      <Insets left="5.0" right="5.0" />
+                                                   </padding>
+                                                </HBox>
+                                                <VBox prefHeight="118.0" prefWidth="600.0">
+                                                   <children>
+                                                      <HBox prefHeight="40.0" prefWidth="450.0">
+                                                         <children>
+                                                            <JFXTextField fx:id="tfAmort" text="1000">
+                                                               <font>
+                                                                  <Font name="System Bold" size="15.0" />
+                                                               </font>
+                                                               <padding>
+                                                                  <Insets left="5.0" top="5.0" />
+                                                               </padding>
+                                                               <HBox.margin>
+                                                                  <Insets left="10.0" top="10.0" />
+                                                               </HBox.margin>
+                                                            </JFXTextField>
+                                                            <JFXComboBox fx:id="cbFreq" prefWidth="180.0">
+                                                               <HBox.margin>
+                                                                  <Insets left="80.0" top="10.0" />
+                                                               </HBox.margin>
+                                                            </JFXComboBox>
+                                                            <JFXComboBox fx:id="cbTipo" layoutX="175.0" layoutY="20.0" prefWidth="200.0">
+                                                               <HBox.margin>
+                                                                  <Insets left="50.0" top="10.0" />
+                                                               </HBox.margin>
+                                                            </JFXComboBox>
+                                                            <ImageView fitHeight="50.0" fitWidth="133.0" opacity="0.75" pickOnBounds="true" preserveRatio="true">
+                                                               <image>
+                                                                  <Image url="@images/forma-de-pagamento.png" />
+                                                               </image>
+                                                               <HBox.margin>
+                                                                  <Insets left="100.0" />
+                                                               </HBox.margin>
+                                                            </ImageView>
+                                                         </children>
+                                                      </HBox>
+                                                      <HBox prefHeight="100.0" prefWidth="500.0">
+                                                         <children>
+                                                            <JFXSlider fx:id="slAmort" blockIncrement="1.0" majorTickUnit="20000.0" max="150000.0" minorTickCount="9999" prefHeight="63.0" prefWidth="1133.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="1000.0">
+                                                               <padding>
+                                                                  <Insets left="8.0" right="8.0" top="25.0" />
+                                                               </padding>
+                                                               <HBox.margin>
+                                                                  <Insets left="5.0" right="5.0" top="5.0" />
+                                                               </HBox.margin>
+                                                            </JFXSlider>
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="15.0" />
+                                       </HBox.margin>
+                                    </Pane>
+                                 </children>
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </VBox>
+                  <VBox prefWidth="219.0" styleClass="pane" stylesheets="@stylesheet.css" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </HBox.margin>
+                     <children>
+                        <Label text="Dica">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="5.0" top="5.0" />
+                           </VBox.margin>
+                           <graphic>
+                              <ImageView fitHeight="44.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/bulb-2.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Label>
+                        <TextArea fx:id="dicaText" editable="false" prefHeight="254.0" prefWidth="205.0" styleClass="pane" stylesheets="@stylesheet.css" wrapText="true">
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="10.0" right="10.0" top="10.0" />
+                           </VBox.margin>
+                        </TextArea>
+                     </children>
+                  </VBox>
+               </children>
                <BorderPane.margin>
                   <Insets />
                </BorderPane.margin>
-               <children>
-                  <HBox prefHeight="170.0" prefWidth="900.0">
-                     <children>
-                        <VBox prefHeight="200.0" prefWidth="380.0">
-                           <children>
-                              <Pane prefHeight="160.0" prefWidth="380.0" styleClass="pane" stylesheets="@stylesheet.css">
-                                 <children>
-                                    <VBox layoutY="-7.0" prefHeight="170.0">
-                                       <children>
-                                          <HBox prefHeight="40.0" prefWidth="380.0">
-                                             <children>
-                                                <Label styleClass="label-cabecalho" stylesheets="@stylesheet.css" text="Tempo">
-                                                   <HBox.margin>
-                                                      <Insets left="5.0" top="10.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <JFXRadioButton fx:id="rbTempoMes" selected="true" text="Meses">
-                                                   <HBox.margin>
-                                                      <Insets left="10.0" top="13.0" />
-                                                   </HBox.margin>
-                                                </JFXRadioButton>
-                                                <JFXRadioButton fx:id="rbTempoAno" text="Anos">
-                                                   <HBox.margin>
-                                                      <Insets left="10.0" top="13.0" />
-                                                   </HBox.margin>
-                                                </JFXRadioButton>
-                                             </children>
-                                             <padding>
-                                                <Insets left="5.0" right="5.0" />
-                                             </padding>
-                                          </HBox>
-                                          <VBox prefHeight="118.0" prefWidth="380.0">
-                                             <children>
-                                                <HBox prefHeight="40.0" prefWidth="200.0">
-                                                   <children>
-                                                      <Label fx:id="lblTempo" prefWidth="280.0" styleClass="label-real" stylesheets="@stylesheet.css" text="360">
-                                                         <padding>
-                                                            <Insets bottom="10.0" left="20.0" top="10.0" />
-                                                         </padding>
-                                                         <HBox.margin>
-                                                            <Insets />
-                                                         </HBox.margin>
-                                                      </Label>
-                                                      <ImageView fitHeight="50.0" fitWidth="50.0" opacity="0.75" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@images/ampulheta.png" />
-                                                         </image>
-                                                      </ImageView>
-                                                   </children>
-                                                </HBox>
-                                                <JFXSlider fx:id="slTempo" blockIncrement="1.0" majorTickUnit="50.0" max="420.0" min="1.0" minorTickCount="50" showTickLabels="true" showTickMarks="true" value="360.0">
-                                                   <VBox.margin>
-                                                      <Insets left="10.0" right="10.0" top="20.0" />
-                                                   </VBox.margin>
-                                                </JFXSlider>
-                                             </children>
-                                          </VBox>
-                                       </children>
-                                    </VBox>
-                                 </children>
-                              </Pane>
-                           </children>
-                           <HBox.margin>
-                              <Insets right="10.0" />
-                           </HBox.margin>
-                        </VBox>
-                        <VBox prefHeight="200.0" prefWidth="480.0">
-                           <children>
-                              <Pane prefHeight="160.0" prefWidth="480.0" styleClass="pane" stylesheets="@stylesheet.css">
-                                 <children>
-                                    <VBox layoutY="-7.0" prefHeight="170.0" prefWidth="480.0" stylesheets="@stylesheet.css">
-                                       <children>
-                                          <HBox prefHeight="40.0" prefWidth="380.0">
-                                             <children>
-                                                <Label styleClass="label-cabecalho" stylesheets="@stylesheet.css" text="Valor do Bem">
-                                                   <HBox.margin>
-                                                      <Insets left="5.0" top="10.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                             </children>
-                                             <padding>
-                                                <Insets left="5.0" right="5.0" />
-                                             </padding>
-                                          </HBox>
-                                          <VBox prefHeight="118.0" prefWidth="420.0">
-                                             <children>
-                                                <HBox prefHeight="40.0" prefWidth="200.0">
-                                                   <children>
-                                                      <JFXTextField fx:id="tfValorBem" text="300000">
-                                                         <HBox.margin>
-                                                            <Insets left="10.0" top="10.0" />
-                                                         </HBox.margin>
-                                                         <padding>
-                                                            <Insets left="5.0" top="5.0" />
-                                                         </padding>
-                                                         <font>
-                                                            <Font name="System Bold" size="15.0" />
-                                                         </font>
-                                                      </JFXTextField>
-                                                      <ImageView fitHeight="50.0" fitWidth="133.0" opacity="0.75" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@images/money.png" />
-                                                         </image>
-                                                         <HBox.margin>
-                                                            <Insets left="170.0" />
-                                                         </HBox.margin>
-                                                      </ImageView>
-                                                   </children>
-                                                </HBox>
-                                                <HBox prefHeight="100.0" prefWidth="200.0">
-                                                   <children>
-                                                      <VBox prefHeight="200.0" prefWidth="100.0">
-                                                         <children>
-                                                            <JFXTextField fx:id="tfMinValorBem" labelFloat="true" promptText="Min" text="50000">
-                                                               <VBox.margin>
-                                                                  <Insets top="15.0" />
-                                                               </VBox.margin>
-                                                            </JFXTextField>
-                                                         </children>
-                                                         <padding>
-                                                            <Insets left="5.0" right="5.0" top="8.0" />
-                                                         </padding>
-                                                      </VBox>
-                                                      <JFXSlider fx:id="slValorBem" blockIncrement="1.0" majorTickUnit="20000.0" max="300000.0" min="50000.0" minorTickCount="20000" prefWidth="280.0" showTickLabels="true" showTickMarks="true" value="300000.0">
-                                                         <HBox.margin>
-                                                            <Insets top="5.0" />
-                                                         </HBox.margin>
-                                                         <padding>
-                                                            <Insets left="8.0" right="8.0" top="25.0" />
-                                                         </padding>
-                                                      </JFXSlider>
-                                                      <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
-                                                         <children>
-                                                            <JFXTextField fx:id="tfMaxValorBem" labelFloat="true" promptText="Max" text="300000">
-                                                               <VBox.margin>
-                                                                  <Insets top="15.0" />
-                                                               </VBox.margin>
-                                                            </JFXTextField>
-                                                         </children>
-                                                         <padding>
-                                                            <Insets left="5.0" right="5.0" top="8.0" />
-                                                         </padding>
-                                                      </VBox>
-                                                   </children>
-                                                </HBox>
-                                             </children>
-                                          </VBox>
-                                       </children>
-                                    </VBox>
-                                 </children>
-                                 <HBox.margin>
-                                    <Insets left="15.0" />
-                                 </HBox.margin>
-                              </Pane>
-                           </children>
-                           <HBox.margin>
-                              <Insets right="10.0" />
-                           </HBox.margin>
-                        </VBox>
-                        <VBox layoutX="400.0" layoutY="10.0" prefHeight="200.0" prefWidth="480.0">
-                           <children>
-                              <Pane prefHeight="160.0" prefWidth="480.0" styleClass="pane" stylesheets="@stylesheet.css">
-                                 <children>
-                                    <VBox layoutY="-7.0" prefHeight="170.0" prefWidth="480.0" stylesheets="@stylesheet.css">
-                                       <children>
-                                          <HBox prefHeight="40.0" prefWidth="380.0">
-                                             <children>
-                                                <Label styleClass="label-cabecalho" stylesheets="@stylesheet.css" text="Entrada">
-                                                   <HBox.margin>
-                                                      <Insets left="5.0" top="10.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                             </children>
-                                             <padding>
-                                                <Insets left="5.0" right="5.0" />
-                                             </padding>
-                                          </HBox>
-                                          <VBox prefHeight="118.0" prefWidth="420.0">
-                                             <children>
-                                                <HBox prefHeight="40.0" prefWidth="200.0">
-                                                   <children>
-                                                      <JFXTextField fx:id="tfEntrada" text="25000">
-                                                         <font>
-                                                            <Font name="System Bold" size="15.0" />
-                                                         </font>
-                                                         <padding>
-                                                            <Insets left="5.0" top="5.0" />
-                                                         </padding>
-                                                         <HBox.margin>
-                                                            <Insets left="10.0" top="10.0" />
-                                                         </HBox.margin>
-                                                      </JFXTextField>
-                                                      <ImageView fitHeight="50.0" fitWidth="133.0" opacity="0.75" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@images/profits.png" />
-                                                         </image>
-                                                         <HBox.margin>
-                                                            <Insets left="170.0" />
-                                                         </HBox.margin>
-                                                      </ImageView>
-                                                   </children>
-                                                </HBox>
-                                                <HBox prefHeight="100.0" prefWidth="200.0">
-                                                   <children>
-                                                      <JFXSlider fx:id="slEntrada" blockIncrement="1.0" majorTickUnit="20000.0" max="150000.0" minorTickCount="9999" prefHeight="63.0" prefWidth="471.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="100000.0">
-                                                         <padding>
-                                                            <Insets left="8.0" right="8.0" top="25.0" />
-                                                         </padding>
-                                                         <HBox.margin>
-                                                            <Insets left="5.0" right="5.0" top="5.0" />
-                                                         </HBox.margin>
-                                                      </JFXSlider>
-                                                   </children>
-                                                </HBox>
-                                             </children>
-                                          </VBox>
-                                       </children>
-                                    </VBox>
-                                 </children>
-                                 <HBox.margin>
-                                    <Insets left="15.0" />
-                                 </HBox.margin>
-                              </Pane>
-                           </children>
-                        </VBox>
-                     </children>
-                  </HBox>
-                  <HBox layoutX="20.0" layoutY="20.0" prefHeight="170.0" prefWidth="900.0">
-                     <children>
-                        <VBox prefHeight="200.0" prefWidth="380.0">
-                           <children>
-                              <Pane prefHeight="160.0" prefWidth="380.0" styleClass="pane" stylesheets="@stylesheet.css">
-                                 <children>
-                                    <VBox layoutY="-7.0" prefHeight="170.0">
-                                       <children>
-                                          <HBox prefHeight="40.0" prefWidth="380.0">
-                                             <children>
-                                                <Label styleClass="label-cabecalho" stylesheets="@stylesheet.css" text="Taxa">
-                                                   <HBox.margin>
-                                                      <Insets left="5.0" top="10.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <JFXRadioButton fx:id="rbTaxaMes" text="ao Mês">
-                                                   <HBox.margin>
-                                                      <Insets left="10.0" top="13.0" />
-                                                   </HBox.margin>
-                                                </JFXRadioButton>
-                                                <JFXRadioButton fx:id="rbTaxaAno" text="ao Ano">
-                                                   <HBox.margin>
-                                                      <Insets left="10.0" top="13.0" />
-                                                   </HBox.margin>
-                                                </JFXRadioButton>
-                                             </children>
-                                             <padding>
-                                                <Insets left="5.0" right="5.0" />
-                                             </padding>
-                                          </HBox>
-                                          <VBox prefHeight="118.0" prefWidth="380.0">
-                                             <children>
-                                                <HBox prefHeight="40.0" prefWidth="200.0">
-                                                   <children>
-                                                      <JFXTextField fx:id="tfTaxa" text="0,6821">
-                                                         <font>
-                                                            <Font name="System Bold" size="15.0" />
-                                                         </font>
-                                                         <padding>
-                                                            <Insets left="5.0" top="5.0" />
-                                                         </padding>
-                                                         <HBox.margin>
-                                                            <Insets left="10.0" top="10.0" />
-                                                         </HBox.margin>
-                                                      </JFXTextField>
-                                                      <ImageView fitHeight="50.0" fitWidth="50.0" opacity="0.75" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@images/taxa-de-juro.png" />
-                                                         </image>
-                                                         <HBox.margin>
-                                                            <Insets left="80.0" />
-                                                         </HBox.margin>
-                                                      </ImageView>
-                                                   </children>
-                                                </HBox>
-                                                <HBox prefHeight="100.0" prefWidth="200.0">
-                                                   <children>
-                                                      <JFXSlider fx:id="slTaxa" blockIncrement="1.0E-4" majorTickUnit="0.01" max="10.0" min="1.0E-4" minorTickCount="1" prefHeight="53.0" prefWidth="275.0" snapToTicks="true" value="0.7974">
-                                                         <padding>
-                                                            <Insets left="8.0" right="8.0" top="25.0" />
-                                                         </padding>
-                                                         <HBox.margin>
-                                                            <Insets top="5.0" />
-                                                         </HBox.margin>
-                                                      </JFXSlider>
-                                                      <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="100.0">
-                                                         <padding>
-                                                            <Insets left="5.0" right="5.0" top="8.0" />
-                                                         </padding>
-                                                         <children>
-                                                            <JFXTextField fx:id="tfMaxTaxa" labelFloat="true" promptText="Max" text="10">
-                                                               <VBox.margin>
-                                                                  <Insets top="15.0" />
-                                                               </VBox.margin>
-                                                            </JFXTextField>
-                                                         </children>
-                                                      </VBox>
-                                                   </children>
-                                                </HBox>
-                                             </children>
-                                          </VBox>
-                                       </children>
-                                    </VBox>
-                                 </children>
-                              </Pane>
-                           </children>
-                           <HBox.margin>
-                              <Insets right="10.0" />
-                           </HBox.margin>
-                        </VBox>
-                        <VBox prefHeight="200.0" prefWidth="972.0">
-                           <children>
-                              <Pane prefHeight="160.0" prefWidth="972.0" styleClass="pane" stylesheets="@stylesheet.css">
-                                 <children>
-                                    <VBox layoutY="-7.0" prefHeight="170.0" prefWidth="972.0" stylesheets="@stylesheet.css">
-                                       <children>
-                                          <HBox prefHeight="40.0" prefWidth="380.0">
-                                             <children>
-                                                <Label styleClass="label-cabecalho" stylesheets="@stylesheet.css" text="Amortização">
-                                                   <HBox.margin>
-                                                      <Insets left="5.0" top="10.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <Label text="Frequência" textFill="#aea4a4">
-                                                   <HBox.margin>
-                                                      <Insets left="125.0" top="20.0" />
-                                                   </HBox.margin>
-                                                   <font>
-                                                      <Font size="12.0" />
-                                                   </font>
-                                                </Label>
-                                                <Label layoutX="247.0" layoutY="30.0" text="Tipo" textFill="#aea4a4">
-                                                   <HBox.margin>
-                                                      <Insets left="140.0" top="20.0" />
-                                                   </HBox.margin>
-                                                   <font>
-                                                      <Font size="12.0" />
-                                                   </font>
-                                                </Label>
-                                             </children>
-                                             <padding>
-                                                <Insets left="5.0" right="5.0" />
-                                             </padding>
-                                          </HBox>
-                                          <VBox prefHeight="118.0" prefWidth="972.0">
-                                             <children>
-                                                <HBox prefHeight="40.0" prefWidth="972.0">
-                                                   <children>
-                                                      <JFXTextField fx:id="tfAmort" text="1000">
-                                                         <font>
-                                                            <Font name="System Bold" size="15.0" />
-                                                         </font>
-                                                         <padding>
-                                                            <Insets left="5.0" top="5.0" />
-                                                         </padding>
-                                                         <HBox.margin>
-                                                            <Insets left="10.0" top="10.0" />
-                                                         </HBox.margin>
-                                                      </JFXTextField>
-                                                      <JFXComboBox fx:id="cbFreq" prefWidth="180.0">
-                                                         <HBox.margin>
-                                                            <Insets left="80.0" top="10.0" />
-                                                         </HBox.margin>
-                                                      </JFXComboBox>
-                                                      <JFXComboBox fx:id="cbTipo" layoutX="175.0" layoutY="20.0" prefWidth="180.0">
-                                                         <HBox.margin>
-                                                            <Insets left="50.0" top="10.0" />
-                                                         </HBox.margin>
-                                                      </JFXComboBox>
-                                                      <ImageView fitHeight="50.0" fitWidth="133.0" opacity="0.75" pickOnBounds="true" preserveRatio="true">
-                                                         <image>
-                                                            <Image url="@images/forma-de-pagamento.png" />
-                                                         </image>
-                                                         <HBox.margin>
-                                                            <Insets left="340.0" />
-                                                         </HBox.margin>
-                                                      </ImageView>
-                                                   </children>
-                                                </HBox>
-                                                <HBox prefHeight="100.0" prefWidth="972.0">
-                                                   <children>
-                                                      <VBox prefHeight="200.0" prefWidth="200.0">
-                                                         <padding>
-                                                            <Insets left="5.0" right="5.0" top="8.0" />
-                                                         </padding>
-                                                      </VBox>
-                                                      <JFXSlider fx:id="slAmort" blockIncrement="1.0" majorTickUnit="20000.0" max="150000.0" minorTickCount="9999" prefHeight="63.0" prefWidth="1133.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="1000.0">
-                                                         <padding>
-                                                            <Insets left="8.0" right="8.0" top="25.0" />
-                                                         </padding>
-                                                         <HBox.margin>
-                                                            <Insets left="5.0" right="5.0" top="5.0" />
-                                                         </HBox.margin>
-                                                      </JFXSlider>
-                                                      <VBox layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0">
-                                                         <padding>
-                                                            <Insets left="5.0" right="5.0" top="8.0" />
-                                                         </padding>
-                                                      </VBox>
-                                                   </children>
-                                                </HBox>
-                                             </children>
-                                          </VBox>
-                                       </children>
-                                    </VBox>
-                                 </children>
-                                 <HBox.margin>
-                                    <Insets left="15.0" />
-                                 </HBox.margin>
-                              </Pane>
-                           </children>
-                           <HBox.margin>
-                              <Insets right="10.0" />
-                           </HBox.margin>
-                        </VBox>
-                     </children>
-                  </HBox>
-               </children>
-               <padding>
-                  <Insets left="10.0" right="10.0" top="10.0" />
-               </padding>
-            </VBox>
+            </HBox>
          </top>
          <padding>
             <Insets left="5.0" right="5.0" />
          </padding>
          <center>
-            <JFXTabPane prefHeight="600.0" prefWidth="1380.0" BorderPane.alignment="CENTER">
+            <JFXTabPane prefHeight="600.0" prefWidth="1380.0" stylesheets="@stylesheet.css" BorderPane.alignment="CENTER">
                <tabs>
-                  <Tab text="Simulação">
+                  <Tab closable="false" text="Simulação">
                     <content>
                       <AnchorPane minWidth="-Infinity" prefHeight="600.0" prefWidth="1380.0">
                            <children>
@@ -485,21 +509,21 @@
                                        <tabs>
                                           <Tab text="Resumo">
                                             <content>
-                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="200.0">
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="200.0" styleClass="titled-pane-detalhe" stylesheets="@stylesheet.css">
                                                    <children>
-                                                      <VBox prefHeight="107.0" prefWidth="1380.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                      <VBox prefHeight="107.0" prefWidth="1380.0" style="-fx-background-color: #FFFFFF;" styleClass="titled-pane-detalhe" stylesheets="@stylesheet.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                          <children>
                                                             <TableView fx:id="tabelaResumo" prefHeight="410.0" prefWidth="200.0" styleClass="table-view-resumo" stylesheets="@stylesheet.css" VBox.vgrow="ALWAYS">
                                                               <columns>
-                                                                <TableColumn fx:id="colResCampos" editable="false" prefWidth="354.0" resizable="false" sortable="false" text="Campos" />
+                                                                <TableColumn fx:id="colResCampos" editable="false" prefWidth="500.0" resizable="false" sortable="false" text="Campos" />
                                                                 <TableColumn editable="false" minWidth="155.0" prefWidth="225.0" resizable="false" sortable="false" text="Valores">
                                                                      <columns>
-                                                                        <TableColumn fx:id="colResSac" editable="false" prefWidth="200.0" resizable="false" sortable="false" styleClass="coluna" text="SAC" />
-                                                                        <TableColumn fx:id="colResPrice" editable="false" prefWidth="200.0" resizable="false" sortable="false" styleClass="coluna" text="PRICE" />
+                                                                        <TableColumn fx:id="colResSac" editable="false" prefWidth="300.0" resizable="false" sortable="false" styleClass="coluna" text="SAC" />
+                                                                        <TableColumn fx:id="colResPrice" editable="false" prefWidth="300.0" resizable="false" sortable="false" styleClass="coluna" text="PRICE" />
                                                                      </columns>
                                                                   </TableColumn>
-                                                                  <TableColumn fx:id="colResDiferenca" prefWidth="200.0" resizable="false" styleClass="coluna" text="Diferença" />
-                                                                  <TableColumn fx:id="colResPerc" prefWidth="200.0" resizable="false" styleClass="coluna" text="\%" />
+                                                                  <TableColumn fx:id="colResDiferenca" prefWidth="200.0" resizable="false" styleClass="coluna" text="Diferença" visible="false" />
+                                                                  <TableColumn fx:id="colResPerc" prefWidth="200.0" resizable="false" styleClass="coluna" text="\%" visible="false" />
                                                               </columns>
                                                             </TableView>
                                                          </children>
@@ -546,6 +570,9 @@
                                                                      <padding>
                                                                         <Insets bottom="5.0" />
                                                                      </padding>
+                                                                     <font>
+                                                                        <Font name="System Bold" size="15.0" />
+                                                                     </font>
                                                                   </TitledPane>
                                                                </children>
                                                             </AnchorPane>
@@ -578,6 +605,9 @@
                                                                            </children>
                                                                         </AnchorPane>
                                                                      </content>
+                                                                     <font>
+                                                                        <Font name="System Bold" size="15.0" />
+                                                                     </font>
                                                                   </TitledPane>
                                                                </children>
                                                             </AnchorPane>
